@@ -27,7 +27,7 @@ export default {
       },
     },
     onMounted: async function (el, store, _) {
-      /** @type {any} */ (el).apply(store?.stac);
+      /** @type {any} */ (el).apply(store?.stac.filter((item)=>item.rel === "child"));
       /** @type {any} */ (el).config.onSelect = async (item) => {
         await store.loadSelectedSTAC(item.href);
       };
