@@ -1,0 +1,1 @@
+import{o as r,f as t}from"./index-Cf7-fAKn.js";const s=["src"],n={__name:"IframeWrapper",props:{src:{type:String,required:!0}},setup(e){return(c,a)=>(r(),t("iframe",{src:e.src,style:{width:"100%",height:"100%"}},null,8,s))}};export{n as default};
