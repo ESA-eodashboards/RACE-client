@@ -1,0 +1,26 @@
+{
+  "name": "config-template",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "eodash dev",
+    "build": "eodash build",
+    "preview": "eodash preview",
+    "lint": "eslint .",
+    "format": "prettier . --write"
+  },
+  "dependencies": {
+    "@eodash/eodash": "^5.0.0-alpha.1.12",
+    "@eox/map": "^1.3.0",
+    "@eox/stacinfo": "^0.3.0"
+  },
+  "author": "",
+  "devDependencies": {
+    "@eox/eslint-config": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  }
+}

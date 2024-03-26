@@ -1,0 +1,14 @@
+{
+  "name": "eodash config template",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye",
+  "updateContentCommand": "npm install",
+  "postAttachCommand": "npm run dev",
+  "forwardPorts": [3000],
+  "customizations": {
+    "vscode": {
+      "extensions": ["esbenp.prettier-vscode"],
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+node_modules
+app
+.vscode
+.DS_Store
+.eodash/
+dist
