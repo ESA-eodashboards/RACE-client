@@ -30,7 +30,7 @@ jobs:
       - if: github.event.action != 'closed'
         run: |
           npm install
-          npm run docs:build -- --base /${{ github.event.repository.name }}/pr-preview/pr-${{ github.event.number }}/
+          npm run build -- --base /${{ github.event.repository.name }}/pr-preview/pr-${{ github.event.number }}/
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
