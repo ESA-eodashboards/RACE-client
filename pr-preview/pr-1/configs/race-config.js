@@ -1,4 +1,3 @@
-import { mdiViewDashboard, mdiViewDashboardVariant } from "@mdi/js";
 let stacEndpoint =
   "https://esa-eodash.github.io/RACE-catalog/RACE/catalog.json";
 const searchParams = new URLSearchParams(window.location.search);
@@ -78,7 +77,7 @@ export default {
             name: "EodashTools",
             properties: {
               layoutTarget: "expert",
-              layoutIcon: mdiViewDashboardVariant,
+              layoutIcon: "M2,5V19H8V5H2M9,5V10H15V5H9M16,5V14H22V5H16M9,11V19H15V11H9M16,15V19H22V15H16Z",
               itemFilterConfig: {
                 resultType: "cards",
                 filtersTitle: "",
@@ -200,7 +199,7 @@ export default {
             name: "EodashTools",
             properties: {
               layoutTarget: "light",
-              layoutIcon: mdiViewDashboard,
+              layoutIcon: "M13,3V9H21V3M13,21H21V11H13M3,21H11V15H3M3,13H11V3H3V13Z",
               itemFilterConfig: {
                 resultType: "cards",
                 subTitleProperty: "subtitle",
