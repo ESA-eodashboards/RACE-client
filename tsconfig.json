@@ -7,9 +7,9 @@
     "checkJs": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "module": "esnext",
-    "moduleResolution": "node"
+    "module": "ESNext",
+    "moduleResolution": "Node"
   },
   "exclude": ["node_modules", ".eodash", "public", "dist"],
-  "include": ["src/**/**.js", "types.d.ts"]
+  "include": ["**/*.js", "**/*.vue", "**/*.d.ts", "**/*.ts"]
 }

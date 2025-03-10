@@ -1,4 +1,7 @@
 # .github/workflows/preview.yml
+# This is a basic workflow takes care of building and deploying
+# client when creating merge request
+
 name: Deploy PR previews
 
 on:
@@ -7,8 +10,9 @@ on:
       - opened
       - reopened
       - synchronize
-      - closed
+      - closed # pr-preview-action will do cleanup here, but build steps can be skipped
 
+# do not allow running multiple of pipelines for this PR in parallel
 concurrency: preview-${{ github.ref }}
 
 jobs:
@@ -19,16 +23,15 @@ jobs:
       pages: write
       pull-requests: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Install and Build
-        if: github.event.action != 'closed'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/checkout@v4
+      - if: github.event.action != 'closed'
         run: |
           npm install
           npm run build -- --base /${{ github.event.repository.name }}/pr-preview/pr-${{ github.event.number }}/
-
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
-          source-dir: ./.eodash/dist/
+          source-dir: .vitepress/dist/

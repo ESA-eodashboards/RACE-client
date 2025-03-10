@@ -1,6 +1,7 @@
-node_modules
-app
-.vscode
-.DS_Store
-.eodash/
 dist
+node_modules
+.vitepress/dist
+.vitepress/cache
+.eodash/cache
+.eodash/dist
+.DS_Store

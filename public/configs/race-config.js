@@ -1,35 +1,43 @@
-import { createEodash, store } from "@eodash/eodash";
-const { currentUrl } = store.states;
-import { mdiViewDashboard, mdiViewDashboardVariant } from "@mdi/js";
-import { reactive } from "vue";
+let stacEndpoint =
+  "https://esa-eodash.github.io/RACE-catalog/RACE/catalog.json";
+const searchParams = new URLSearchParams(window.location.search);
+if (searchParams.has("catalog")) {
+  stacEndpoint = stacEndpoint.replace(
+    "catalog/",
+    `catalog/pr-preview/${searchParams.get("catalog")}/`,
+  );
+}
 
-export default createEodash({
-  id: "template-id",
-  stacEndpoint:
-    "https://esa-eodash.github.io/RACE-catalog/RACE/catalog.json",
-  // routes: [],
+export default {
+  id: "demo",
+  stacEndpoint: "https://esa-eodash.github.io/RACE-catalog/RACE/catalog.json",
   brand: {
-    name: "RAPID ACTION FOR CITIZENS WITH EARTH OBSERVATION",
-    // shortName: "RACE",
-    font: {
-      link: "style.css",
-      family: "NotesESABold",
-    },
-    logo: "logo.png",
+    noLayout: true,
+    name: "RACE",
     theme: {
       colors: {
         primary: "#003247",
-        secondary: "#003247",
-        background: "#fff",
-        surface: "#fff",
+        secondary: "#00ae92",
+        surface: "#ffff",
       },
+      variables: {
+        "surface-opacity": 0.6,
+        "primary-opacity": 0.8,
+      },
+      // Bank-Wong palette
+      collectionsPalette: [
+        "#009E73",
+        "#E69F00",
+        "#56B4E9",
+        "#009E73",
+        "#F0E442",
+        "#0072B2",
+        "#D55E00",
+        "#CC79A7",
+        "#994F00",
+      ],
     },
-    /*
-    meta: {
-      title: "Rapid Action for Citizens with Earth Observation",
-      content: 'Dashboard for ESA EO data examples'
-    }
-      */
+    footerText: "Demo configuration of eodash client",
   },
   templates: {
     light: {
@@ -50,7 +58,7 @@ export default createEodash({
         },
       },
       background: {
-        id: Symbol(),
+        id: "background-map",
         type: "internal",
         widget: {
           name: "EodashMap",
@@ -69,7 +77,7 @@ export default createEodash({
             name: "EodashTools",
             properties: {
               layoutTarget: "expert",
-              layoutIcon: mdiViewDashboardVariant,
+              layoutIcon: "M2,5V19H8V5H2M9,5V10H15V5H9M16,5V14H22V5H16M9,11V19H15V11H9M16,15V19H22V15H16Z",
               itemFilterConfig: {
                 resultType: "cards",
                 filtersTitle: "",
@@ -140,7 +148,7 @@ export default createEodash({
               ? {
                   id: "Datepicker",
                   type: "internal",
-                  layout: { x: 5, y: 11, w: 2, h: 1 },
+                  layout: { x: 5, y: 8, w: 2, h: 4 },
                   title: "Date",
                   widget: {
                     name: "EodashDatePicker",
@@ -172,7 +180,7 @@ export default createEodash({
         },
       },
       background: {
-        id: Symbol(),
+        id: "background-map",
         type: "internal",
         widget: {
           name: "EodashMap",
@@ -191,7 +199,7 @@ export default createEodash({
             name: "EodashTools",
             properties: {
               layoutTarget: "light",
-              layoutIcon: mdiViewDashboard,
+              layoutIcon: "M13,3V9H21V3M13,21H21V11H13M3,21H11V15H3M3,13H11V3H3V13Z",
               itemFilterConfig: {
                 resultType: "cards",
                 subTitleProperty: "subtitle",
@@ -223,10 +231,6 @@ export default createEodash({
                   type: "internal",
                   widget: {
                     name: "EodashStacInfo",
-                    properties: {
-                      showIndicatorsBtn: false,
-                      showLayoutSwitcher: false,
-                    },
                   },
                 }
               : null;
@@ -274,7 +278,7 @@ export default createEodash({
                   id: "Processes",
                   type: "internal",
                   title: "Processes",
-                  layout: { x: 9, y: 7, w: 3, h: 5 },
+                  layout: { x: 9, y: 6, w: 3, h: 5 },
                   widget: {
                     name: "EodashProcess",
                   },
@@ -301,7 +305,7 @@ export default createEodash({
         },
       },
       background: {
-        id: Symbol(),
+        id: "background-map",
         type: "internal",
         widget: {
           name: "EodashMap",
@@ -319,8 +323,7 @@ export default createEodash({
           widget: {
             name: "EodashTools",
             properties: {
-              layoutTarget: "expert",
-              layoutIcon: mdiViewDashboardVariant,
+              showLayoutSwitcher: false,
               itemFilterConfig: {
                 cssVars: {
                   "--form-flex-direction": "row",
@@ -398,7 +401,9 @@ export default createEodash({
                   widget: {
                     name: "EodashMapBtns",
                     properties: {
-                      compareIndicators: false,
+                      compareIndicators: {
+                        fallbackTemplate: "light",
+                      },
                     },
                   },
                 }
@@ -427,5 +432,5 @@ export default createEodash({
         },
       ],
     },
-  }
-});
+  },
+};
