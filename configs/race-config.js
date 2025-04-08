@@ -10,7 +10,7 @@ if (searchParams.has("catalog")) {
 
 export default {
   id: "demo",
-  stacEndpoint: "https://esa-eodash.github.io/RACE-catalog/RACE/catalog.json",
+  stacEndpoint: "https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json",
   brand: {
     noLayout: true,
     name: "RACE",
