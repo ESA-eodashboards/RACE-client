@@ -1,8 +1,7 @@
 <template>
   <span>
-    <div v-if="isActive" class="modal-success">
+    <div class="modal-success">
       <v-dialog v-model="isActive" width="500">
-        <!-- Activator Slot: TODO -->
         <template #activator="{ props }">
           <v-btn v-bind="props">
             <span> 💣 Open game dialog </span>
@@ -193,7 +192,7 @@ const { mode, isEnabled, game, bbox, enableSpeciesDisplay, elapsedSeconds } =
       default: false,
     },
     game: {
-      type: Object,
+      type: [Object, null],
       required: true,
     },
     elapsedSeconds: {
@@ -265,9 +264,9 @@ function copyStatsToClipboard() {
   } else if (mode === "gameover") {
     string = `✨ #EOxMinesweeper Challenge ${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}
   
-  🌟  TOTAL UNCOVERED AREA: ${Math.round(game.game.getUncoveredAreaPercent() * 100)}%
-  🔳  NUMBER OF CELLS:      ${game.game.fieldCount}
-  💣  NUMBER OF MINES:      ${game.game.mineCount}`;
+  🌟  TOTAL UNCOVERED AREA: ${Math.round(game?.game.getUncoveredAreaPercent() * 100)}%
+  🔳  NUMBER OF CELLS:      ${game?.game.fieldCount}
+  💣  NUMBER OF MINES:      ${game?.game.mineCount}`;
   }
   if (enableSpeciesDisplay) {
     string += "\n\nDiscovered species:\n";

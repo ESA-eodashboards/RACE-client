@@ -194,14 +194,24 @@ export default createEodash({
       },
       widgets: [
         {
-          id: "Minesweeper",
-          layout: { x: 4, y: 0, w: 3, h: 1 },
-          title: "Minesweeper",
-          type: "internal",
-          widget: {
-            //@ts-expect-error
-            name: "IDEASMinesweeper",
-            properties: {},
+          //@ts-expect-error
+          defineWidget(collection) {
+            return (
+              [
+                "IDEAS2_wildlife_minesweeper",
+                "IND1_1_minesweeper",
+                "IND2_1_minesweeper",
+              ].includes(collection?.id ?? "") && {
+                id: "Minesweeper",
+                layout: { x: 4, y: 0, w: 3, h: 1 },
+                title: "Minesweeper",
+                type: "internal",
+                widget: {
+                  name: "IDEASMinesweeper",
+                  properties: {},
+                },
+              }
+            );
           },
         },
         {

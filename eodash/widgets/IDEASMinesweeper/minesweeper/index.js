@@ -15,7 +15,7 @@ import HexSweeperGame from "./board";
  * Generate a pseudorandom 128-bit hash from a string to use as a seed.
  *
  * @param {String} str - The seed string.
- * @returns {Array} Four 32-bit numbers used as starting values for the `splitmix32` PRNG.
+ * @returns Four 32-bit numbers used as starting values for the `splitmix32` PRNG.
  */
 function cyrb128(str) {
   let h1 = 1779033703;
@@ -46,7 +46,7 @@ function cyrb128(str) {
  * Implementation of the fast and simple `splitmix32` PRNG algorithm.
  *
  * @param {Number} a - Initial seed value.
- * @returns {Number} The generated random number.
+ * @returns {()=> number} The generated random number callback function.
  */
 function splitmix32(a) {
   return () => {
@@ -64,10 +64,10 @@ function splitmix32(a) {
 /**
  * Get a seedable random bbox within world bounds.
  *
- * @param {Object} worldBounds - The bounding box in which the random bbox should be generated.
- * @param {Object} horizontalExtent - How wide the generated bbox should be.
- * @param {Object} seedString - Optional parameter to make output deterministic and repeatable.
- * @returns {Array} The generated bbox as a [long, lat, long, lat] array.
+ * @param {*} worldBounds - The bounding box in which the random bbox should be generated.
+ * @param {*} horizontalExtent - How wide the generated bbox should be.
+ * @param {string} [seedString] - Optional parameter to make output deterministic and repeatable.
+ * @returns The generated bbox as a [long, lat, long, lat] array.
  */
 function getRandomBoundingBox(worldBounds, horizontalExtent, seedString) {
   let rng;
@@ -111,19 +111,27 @@ function getRandomBoundingBox(worldBounds, horizontalExtent, seedString) {
 /**
  * Set up the game grid using HexGrid.
  *
- * @param {Object} game - The game object.
- * @returns {Object} The created `HexGrid`.
+ * @param {*} game - The game object.
+ * @returns The created `HexGrid`.
  */
 const setupGrid = (game) => {
   const grid = new HexGrid({
-    size: game.gameSize,
+    Size: game.gameSize,
     origin: game.center,
   });
   return {
     grid,
   };
 };
-
+/**
+ *
+ * @param {*} v
+ * @param {*} [minValue =1]
+ * @param {*} [maxValue =8]
+ * @param {*} [minColor = {r: 255, g: 255, b: 255, a: 0.0}]
+ * @param {*} [maxColor = {r: 0, g: 0, b: 0, a: 1.0}]
+ * @returns
+ */
 function getColorFromValue(
   v,
   minValue = 1,
@@ -166,7 +174,15 @@ function getColorFromValue(
 
   return color;
 }
-
+/**
+ *
+ * @param {*} tile
+ * @param {*} minValue
+ * @param {*} maxValue
+ * @param {*} minColor
+ * @param {*} maxColor
+ * @returns
+ */
 const getTileStyle = (tile, minValue, maxValue, minColor, maxColor) => {
   let style;
   if (tile.isRevealed === true) {
@@ -225,7 +241,15 @@ const getTileStyle = (tile, minValue, maxValue, minColor, maxColor) => {
 
   return style;
 };
-
+/**
+ *
+ * @param {*} x
+ * @param {*} y
+ * @param {*} grid
+ * @param {*} vectorSource
+ * @param {*} vectorLayer
+ * @param {*} game
+ */
 const updateTileVisuals = (x, y, grid, vectorSource, vectorLayer, game) => {
   const [q, r] = game.convertGameCoordsToAxial(x + 1, y);
   const hexagonVertices = grid.getHexagon([q, r]);
@@ -256,7 +280,13 @@ const updateTileVisuals = (x, y, grid, vectorSource, vectorLayer, game) => {
   // Force redraw
   vectorLayer.changed();
 };
-
+/**
+ *
+ * @param {*} game
+ * @param {*} grid
+ * @param {*} vectorSource
+ * @param {*} vectorLayer
+ */
 const updateAllTileVisuals = (game, grid, vectorSource, vectorLayer) => {
   // Clear the existing features
   vectorSource.clear();
@@ -274,10 +304,11 @@ const updateAllTileVisuals = (game, grid, vectorSource, vectorLayer) => {
 /**
  * Handle a map click event.
  *
- * @param {Event} e - The click event.
- * @param {Object} map - The OpenLayers map instance.
+ * @param {*} e - The click event.
  * @param {HexSweeperGame} game - The game instance.
- * @param {Object} grid - The hex grid.
+ * @param {*} grid - The hex grid.
+ * @param {*} vectorSource - The vector source for the map.
+ * @param {Function} updateTileVisualsCallback - Callback to update tile visuals.
  */
 const handleMapClick = (
   e,
@@ -351,8 +382,8 @@ const handleMapRightClick = (e, game, grid, vectorSource, vectorLayer) => {
  * Draw the game board by creating hexagon features and adding them to the map.
  *
  * @param {HexSweeperGame} game - The game instance.
- * @param {Object} grid - The hex grid.
- * @param {Object} vectorSource
+ * @param {*} grid - The hex grid.
+ * @param {*} vectorSource
  */
 const drawGameBoard = (game, grid, vectorSource) => {
   if (!game) {
@@ -360,6 +391,7 @@ const drawGameBoard = (game, grid, vectorSource) => {
   }
   for (let y = 0; y < game.height; y++) {
     // Make our edges straight again so the cell calculation works out
+    //@ts-expect-error
     let xOffset = (y % 2 !== 0) * 1 - y / 2;
     if (y % 2 === 0) {
       xOffset += 1.0;

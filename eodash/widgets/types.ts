@@ -13,7 +13,7 @@ export interface Minesweeper {
   isDialogEnabled: boolean;
   isLoaded: boolean;
   mode: string;
-  game: Record<string, any>;
+  game: Record<string, any> | null;
   timer: number | null;
   bbox: number[];
   minesweeperOptions: {

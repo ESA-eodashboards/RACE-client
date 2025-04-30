@@ -11,7 +11,7 @@ export const minesweeper = {
   isDialogEnabled: false,
   isLoaded: false,
   mode: "start",
-  game: {},
+  game: null,
   timer: null,
   bbox: [],
   minesweeperOptions: {
