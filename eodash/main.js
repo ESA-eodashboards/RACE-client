@@ -1,4 +1,4 @@
-import { createEodash } from "@eodash/eodash/.";
+import { createEodash } from "@eodash/eodash";
 let stacEndpoint =
   "https://esa-eodash.github.io/RACE-catalog/RACE/catalog.json";
 const searchParams = new URLSearchParams(window.location.search);
@@ -11,7 +11,8 @@ if (searchParams.has("catalog")) {
 
 export default createEodash({
   id: "demo",
-  stacEndpoint: "https://esa-eodash.github.io/RACE-catalog/RACE/catalog.json",
+  stacEndpoint:
+    "https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json",
   brand: {
     noLayout: true,
     name: "RACE",
@@ -78,7 +79,8 @@ export default createEodash({
             name: "EodashTools",
             properties: {
               layoutTarget: "expert",
-              layoutIcon: "M2,5V19H8V5H2M9,5V10H15V5H9M16,5V14H22V5H16M9,11V19H15V11H9M16,15V19H22V15H16Z",
+              layoutIcon:
+                "M2,5V19H8V5H2M9,5V10H15V5H9M16,5V14H22V5H16M9,11V19H15V11H9M16,15V19H22V15H16Z",
               itemFilterConfig: {
                 resultType: "cards",
                 filtersTitle: "",
@@ -192,14 +194,15 @@ export default createEodash({
       },
       widgets: [
         {
-            id:"Minesweeper",
-            layout:{x:4,y:0,w:3,h:1},
-            title:"Minesweeper",
-            type:"internal",
-            widget:{
-                name:"IDEASEMinesweeper",
-                properties:{}
-            }
+          id: "Minesweeper",
+          layout: { x: 4, y: 0, w: 3, h: 1 },
+          title: "Minesweeper",
+          type: "internal",
+          widget: {
+            //@ts-expect-error
+            name: "IDEASMinesweeper",
+            properties: {},
+          },
         },
         {
           id: Symbol(),
@@ -210,7 +213,8 @@ export default createEodash({
             name: "EodashTools",
             properties: {
               layoutTarget: "light",
-              layoutIcon: "M13,3V9H21V3M13,21H21V11H13M3,21H11V15H3M3,13H11V3H3V13Z",
+              layoutIcon:
+                "M13,3V9H21V3M13,21H21V11H13M3,21H11V15H3M3,13H11V3H3V13Z",
               itemFilterConfig: {
                 resultType: "cards",
                 subTitleProperty: "subtitle",
@@ -444,4 +448,4 @@ export default createEodash({
       ],
     },
   },
-})
+});

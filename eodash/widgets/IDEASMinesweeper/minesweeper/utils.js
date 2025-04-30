@@ -1,4 +1,10 @@
 // Function to calculate the xx th percentile
+/**
+ *
+ * @param {*} arr
+ * @param {*} percentile
+ * @returns
+ */
 export default function getPercentile(arr, percentile) {
   // Create a copy of the array and sort the copy
   const sortedArr = [...arr].filter((item) => item !== 0).sort((a, b) => a - b);
@@ -8,25 +14,46 @@ export default function getPercentile(arr, percentile) {
   return sortedArr[Math.round(index)];
 }
 
+/**
+ *
+ * @param {*} point
+ * @param {*} bbox
+ * @returns
+ */
 function isWithinBounds(point, bbox) {
   const [minX, minY, maxX, maxY] = bbox;
-  return point[0] >= minX && point[0] <= maxX && point[1] >= minY && point[1] <= maxY;
+  return (
+    point[0] >= minX && point[0] <= maxX && point[1] >= minY && point[1] <= maxY
+  );
 }
-
+/**
+ *
+ * @param {*} bbox
+ * @returns
+ */
 export async function getSpeciesList(bbox) {
   // Get wildlife species index
-  const r1 = await fetch('https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator2/Species_Index_Images_v2.json');
+  const r1 = await fetch(
+    "https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator2/Species_Index_Images_v2.json",
+  );
   const speciesIndex = await r1.json();
 
   // Get locations of species
-  const r2 = await fetch('https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator2/Europe_characteristic_species.geojson');
+  const r2 = await fetch(
+    "https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator2/Europe_characteristic_species.geojson",
+  );
   const speciesLocations = await r2.json();
 
   const accumulatedSpecies = speciesLocations.features
+    //@ts-expect-error
     .filter((point) => isWithinBounds(point.geometry.coordinates, bbox))
+    //@ts-expect-error
     .flatMap((point) => point.properties.species_indices)
+    //@ts-expect-error
     .map((index) => speciesIndex.find((species) => species.index === index))
+    //@ts-expect-error
     .filter((species) => species != null)
+    //@ts-expect-error
     .reduce((accumulator, species) => {
       // Check if the species with this index already exists in the accumulator
       if (accumulator[species.index]) {
@@ -50,7 +77,9 @@ export async function getSpeciesList(bbox) {
     // eslint-disable-next-line
     // .filter((item) => item.image_url && /\.(jpg|jpeg|png|gif|bmp|svg|webp)$/i.test(item.image_url))
     .sort((a, b) => b.count - a.count);
-  const speciesWithCommonName = sortedSpecies.filter((item) => item.common_name && item.common_name !== 'Unknown');
+  const speciesWithCommonName = sortedSpecies.filter(
+    (item) => item.common_name && item.common_name !== "Unknown",
+  );
   if (speciesWithCommonName.length < 5) {
     return sortedSpecies.slice(0, 5);
   }

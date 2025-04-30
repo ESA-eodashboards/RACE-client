@@ -1,26 +1,52 @@
-import { fromUrl } from 'geotiff';
-import proj4 from 'proj4';
-import getPercentile from './utils';
+import { fromUrl } from "geotiff";
+import proj4 from "proj4";
+import getPercentile from "./utils";
 
-const EVEN_NEIGHBOR_OFFSETS = [[-1, -1], [0, -1], [-1, 0], [1, 0], [-1, 1], [0, 1]];
-const ODD_NEIGHBOR_OFFSETS = [[0, -1], [1, -1], [-1, 0], [1, 0], [0, 1], [1, 1]];
+const EVEN_NEIGHBOR_OFFSETS = [
+  [-1, -1],
+  [0, -1],
+  [-1, 0],
+  [1, 0],
+  [-1, 1],
+  [0, 1],
+];
+const ODD_NEIGHBOR_OFFSETS = [
+  [0, -1],
+  [1, -1],
+  [-1, 0],
+  [1, 0],
+  [0, 1],
+  [1, 1],
+];
 
 /**
  * Represents the game board and its possible states and calculations.
  */
 export default class HexSweeperGame {
   /**
-     * Create a new game board.
-     *
-     * @param {number} width - The width of the game board (in hex cells).
-     * @param {number} height - The height of the game board (in hex cells).
-     */
+   * Create a new game board.
+   * @param {Object} options - The options for the game board.
+   * @param {number} options.width - The width of the game board (in hex cells).
+   * @param {number} options.height - The height of the game board (in hex cells).
+   * @param {number} options.size - The size of the hex cells.
+   * @param {import("../../types").Locations} options.locations - The locations of the game board.
+   * @param {number} options.selectedLocationIndex - The index of the selected location.
+   * @param {Array<number>} options.bbox - The bounding box of the game board.
+   * @param {string} options.minColor - The minimum color for the game board.
+   * @param {string} options.maxColor - The maximum color for the game board.
+   * @param {number} options.minValue - The minimum value for the game board.
+   * @param {number} options.maxValue - The maximum value for the game board.
+   */
   constructor(options) {
+    this.width = options.width;
+    this.height = options.height;
     this.size = options.size;
     this.locations = options.locations;
     this.selectedLocationIndex = options.selectedLocationIndex;
     this.bbox = options.bbox;
+    /** @type {any[][]} */
     this.board = [];
+    /** @type {number[]} */
     this.center = [];
     this.gameSize = null;
     this.fieldCount = 0;
@@ -59,6 +85,10 @@ export default class HexSweeperGame {
     }
   }
 
+  /**
+   *
+   * @param {*} options
+   */
   async fromGeoTIFF(options) {
     try {
       const tiff = await fromUrl(options.geotiff.url);
@@ -68,8 +98,14 @@ export default class HexSweeperGame {
       // Get the randomized smaller bounding box calculated in the Map component.
       const { bbox } = this;
       // Convert geographic coordinates to distances using EPSG:3857
-      const xmin = proj4(options.geotiff.projection, 'EPSG:3857', [bbox[0], bbox[1]]);
-      const xmax = proj4(options.geotiff.projection, 'EPSG:3857', [bbox[2], bbox[3]]);
+      const xmin = proj4(options.geotiff.projection, "EPSG:3857", [
+        bbox[0],
+        bbox[1],
+      ]);
+      const xmax = proj4(options.geotiff.projection, "EPSG:3857", [
+        bbox[2],
+        bbox[3],
+      ]);
 
       const xDistance = xmax[0] - xmin[0];
       const yDistance = xmax[1] - xmin[1];
@@ -81,10 +117,10 @@ export default class HexSweeperGame {
       // Adjust board dimensions based on actual distances
       this.width = this.size;
       this.height = Math.round(
-        (yDistance / xDistance)
-        * this.size
-        // Account for the fact that hexagons are wider than tall
-        * 1.18,
+        (yDistance / xDistance) *
+          this.size *
+          // Account for the fact that hexagons are wider than tall
+          1.18,
       );
       // Read the GeoTIFF data into a 1-dimensional array
       const [oX, oY] = image.getOrigin();
@@ -103,13 +139,18 @@ export default class HexSweeperGame {
         Math.max(wnd[1], wnd[3]),
       ];
 
-      let data = (await image.readRasters({
-        window: wnd,
-        width: this.width,
-        height: this.height,
-      }))[0];
+      let data = /** @type {import("geotiff").TypedArray} */ (
+        (
+          await image.readRasters({
+            window: wnd,
+            width: this.width,
+            height: this.height,
+          })
+        )[0]
+      );
 
       // Flip the GeoTIFF upside down
+
       data = data.reverse();
 
       const flippedData = new Array(data.length);
@@ -120,14 +161,21 @@ export default class HexSweeperGame {
           flippedData[y * this.width + x] = newData;
         }
       }
-
+      //@ts-expect-error
       data = flippedData;
       const centerInLonLat = [bbox[0], bbox[1]];
-      const center = proj4(options.geotiff.projection, 'EPSG:3857', centerInLonLat);
+      const center = proj4(
+        options.geotiff.projection,
+        "EPSG:3857",
+        centerInLonLat,
+      );
       // not actually center but left bottom corner of start of board but subtract ~1.5 hex
-      this.center = [center[0] - 1.0 * this.gameSize, center[1] + 0.5 * this.gameSize];
+      this.center = [
+        center[0] - 1.0 * this.gameSize,
+        center[1] + 0.5 * this.gameSize,
+      ];
       let threshold = 0;
-      if (typeof location.isMineCondition === 'number') {
+      if (typeof location.isMineCondition === "number") {
         threshold = getPercentile(data, location.isMineCondition);
       }
       // Assuming the data is a single band and the size matches the game board
@@ -136,11 +184,11 @@ export default class HexSweeperGame {
         for (let x = 0; x < this.width; x++) {
           const value = data[y * this.width + x];
           let isMine;
-          if (typeof location.isMineCondition === 'function') {
+          if (typeof location.isMineCondition === "function") {
             isMine = !Number.isNaN(value) && location.isMineCondition(value);
-          } else if (typeof location.isMineCondition === 'number') {
+          } else if (typeof location.isMineCondition === "number") {
             // mines are above threshold based on percentage of values
-            isMine = !Number.isNaN(value) && (value > threshold);
+            isMine = !Number.isNaN(value) && value > threshold;
           } else {
             isMine = Math.round(Math.random());
           }
@@ -175,15 +223,18 @@ export default class HexSweeperGame {
         }
       }
     } catch (error) {
-      console.error('Error loading GeoTIFF data:', error);
+      console.error("Error loading GeoTIFF data:", error);
     }
   }
 
-  /* eslint-disable class-methods-use-this */
+  /**
+   *
+   * @param {*} x
+   * @param {*} y
+   * @returns
+   */
   getNeighborCoordinates(x, y) {
-    const offsets = (y % 2 === 0)
-      ? EVEN_NEIGHBOR_OFFSETS
-      : ODD_NEIGHBOR_OFFSETS;
+    const offsets = y % 2 === 0 ? EVEN_NEIGHBOR_OFFSETS : ODD_NEIGHBOR_OFFSETS;
     return offsets.map(([dx, dy]) => [x + dx, y + dy]);
   }
 
@@ -194,7 +245,6 @@ export default class HexSweeperGame {
    * @param {number} r - The axial row coordinate.
    * @returns {{ x: number, y: number }} Game board coordinates.
    */
-
   convertAxialToGameCoords(q, r) {
     const x = q + Math.floor(r / 2);
     const y = r;
@@ -216,38 +266,43 @@ export default class HexSweeperGame {
   /* eslint-enable class-methods-use-this */
 
   /**
-     * Calculate the number of adjacent mines to a given cell.
-     *
-     * @param {number} x - The x-coordinate of the cell.
-     * @param {number} y - The y-coordinate of the cell.
-     *
-     * @returns {number} - The number of mines adjacent to the cell.
-     */
+   * Calculate the number of adjacent mines to a given cell.
+   *
+   * @param {number} x - The x-coordinate of the cell.
+   * @param {number} y - The y-coordinate of the cell.
+   *
+   * @returns {number} - The number of mines adjacent to the cell.
+   */
   calculateAdjacentMines(x, y) {
     let count = 0;
 
-    const neighbors = y % 2 === 0
-      ? EVEN_NEIGHBOR_OFFSETS
-      : ODD_NEIGHBOR_OFFSETS;
+    const neighbors =
+      y % 2 === 0 ? EVEN_NEIGHBOR_OFFSETS : ODD_NEIGHBOR_OFFSETS;
 
     // eslint-disable-next-line no-restricted-syntax
     for (const [dx, dy] of neighbors) {
       const nx = x + dx;
       const ny = y + dy;
 
-      if (nx >= 0
-          && nx < this.width
-          && ny >= 0
-          && ny < this.height
-          && this.board[ny]
-          && this.board[ny][nx].isMine
+      if (
+        nx >= 0 &&
+        nx < this.width &&
+        ny >= 0 &&
+        ny < this.height &&
+        this.board[ny] &&
+        this.board[ny][nx].isMine
       ) {
         count++;
       }
     }
     return count;
   }
-
+  /**
+   *
+   * @param {*} x
+   * @param {*} y
+   * @returns
+   */
   revealTile(x, y) {
     // Accumulate a list of revealed tile coordinates to update the rendering efficiently.
     let coordinatePairs = [[x, y]];
@@ -268,7 +323,10 @@ export default class HexSweeperGame {
     neighbors.forEach(([nx, ny]) => {
       if (this.isValidCoordinate(nx, ny) && !this.board[ny][nx].isRevealed) {
         // Recursively reveal only if the neighbor is not a mine and has zero adjacent mines.
-        if (!this.board[ny][nx].isMine && this.board[ny][nx].adjacentMines === 0) {
+        if (
+          !this.board[ny][nx].isMine &&
+          this.board[ny][nx].adjacentMines === 0
+        ) {
           coordinatePairs = coordinatePairs.concat(this.revealTile(nx, ny));
         } else if (!this.board[ny][nx].isMine) {
           // If the neighbor is not a mine but has adjacent mines,
@@ -281,19 +339,40 @@ export default class HexSweeperGame {
 
     return coordinatePairs;
   }
-
+  /**
+   *
+   * @param {*} x
+   * @param {*} y
+   * @returns
+   */
   isValidCoordinate(x, y) {
     return !!(this.board[y] && this.board[y][x]);
   }
-
+  /**
+   *
+   * @param {*} x
+   * @param {*} y
+   * @returns
+   */
   isOutOfBounds(x, y) {
     return !this.isValidCoordinate(x, y);
   }
-
+  /**
+   *
+   * @param {*} x
+   * @param {*} y
+   * @returns
+   */
   isMine(x, y) {
     return this.board[y] && this.board[y][x] && this.board[y][x].isMine;
   }
 
+  /**
+   *
+   * @param {*} x
+   * @param {*} y
+   * @returns
+   */
   get(x, y) {
     if (!this.isOutOfBounds(x, y)) {
       return this.board[y][x];

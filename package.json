@@ -3,15 +3,27 @@
   "type": "module",
   "scripts": {
     "start": "npm run dev",
+    "eodash:dev": "eodash dev",
+    "eodash:build": "eodash build",
+    "eodash:preview": "eodash preview",
     "dev": "vitepress dev",
     "build": "vitepress build",
-    "preview": "vitepress preview"
+    "preview": "vitepress preview",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "@eodash/eodash": "^5.0.0-rc.2.5",
+    "@eodash/eodash": "^5.0.0",
     "@eox/storytelling": "^1.5.0",
     "mustache": "^4.2.0",
+    "ol-ext": "^4.0.31",
+    "proj4": "^2.15.0",
     "vitepress": "^1.5.0",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vuetify": "^3.8.3"
+  },
+  "devDependencies": {
+    "@eox/eslint-config": "^2.0.0",
+    "@types/ol": "^7.0.0",
+    "@types/ol-ext": "npm:@siedlerchr/types-ol-ext@^3.6.2"
   }
 }
