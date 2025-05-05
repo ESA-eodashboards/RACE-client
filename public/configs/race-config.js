@@ -9,7 +9,7 @@ if (searchParams.has("catalog")) {
 }
 
 export default {
-  id: "demo",
+  id: "race",
   stacEndpoint:
     "https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json",
   brand: {
@@ -192,6 +192,25 @@ export default {
         },
       },
       widgets: [
+        {
+          //@ts-expect-error
+          defineWidget(collection) {
+            return (
+              ["IDEAS", "minesweeper"].some((c) =>
+                collection?.id.includes(c),
+              ) && {
+                id: "Minesweeper",
+                layout: { x: 4, y: 0, w: 3, h: 1 },
+                title: "Minesweeper",
+                type: "internal",
+                widget: {
+                  name: "IDEASMinesweeper",
+                  properties: {},
+                },
+              }
+            );
+          },
+        },
         {
           id: Symbol(),
           type: "internal",

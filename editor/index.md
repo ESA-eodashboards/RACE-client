@@ -2,10 +2,10 @@
 layout: page
 ---
 
-<script setup>
-    if(!customElements.get('eox-map')) import("@eox/map");
+<script setup client-only>
+    if(!customElements.get('eox-map')) import("@eox/map") && import("@eox/map/dist/eox-map-advanced-layers-and-sources");
     if(!customElements.get('eox-jsonform')) import("@eox/jsonform");
-    import("@eox/map/dist/eox-map-advanced-layers-and-sources");
+    
 </script>
 <style>
     .editor-wrapper {

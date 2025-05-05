@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist/types",
     "target": "esnext",
     "allowJs": true,
+    "noEmit": true,
     "checkJs": true,
     "skipLibCheck": true,
     "useDefineForClassFields": true,

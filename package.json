@@ -7,12 +7,17 @@
     "eodash:build": "eodash build",
     "eodash:preview": "eodash preview",
     "dev": "vitepress dev",
-    "build": "vitepress build",
+    "build": "eodash build && vitepress build",
     "preview": "vitepress preview",
     "format": "prettier --write ."
   },
   "dependencies": {
     "@eodash/eodash": "^5.0.0",
+    "@eox/chart": "^0.4.0",
+    "@eox/itemfilter": "^1.9.2",
+    "@eox/jsonform": "^0.16.3",
+    "@eox/layout": "^0.5.2",
+    "@eox/stacinfo": "^0.6.2",
     "@eox/storytelling": "^1.5.0",
     "mustache": "^4.2.0",
     "ol-ext": "^4.0.31",

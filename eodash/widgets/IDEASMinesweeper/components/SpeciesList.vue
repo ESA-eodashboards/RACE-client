@@ -23,12 +23,14 @@
         <div v-else class="placeholder">?</div>
 
         <a :href="s.image_url" class="names" target="_blank">
-          <dt>
-            <b>{{
-              s.species.replace(/(?:^|\s)\S/g, (match) => match.toUpperCase())
-            }}</b>
-          </dt>
-          <dd>({{ s.common_name }})</dd>
+          <dl>
+            <dt>
+              <b>{{
+                s.species.replace(/(?:^|\s)\S/g, (match) => match.toUpperCase())
+              }}</b>
+            </dt>
+            <dd>({{ s.common_name }})</dd>
+          </dl>
         </a>
         <div class="d-flex row align-center" style="max-width: 80px">
           <div
@@ -50,7 +52,7 @@
     <p>The conservation status indicates how endangered each species is.</p>
     <img
       style="max-width: 60%; margin: 0 20%"
-      src="iucn_status.svg"
+      :src="IUCNLegend"
       alt="IUCN Endangered Species Index legend"
     />
   </div>
@@ -71,6 +73,9 @@ const props = defineProps({
     required: true,
   },
 });
+
+const IUCNLegend = new URL("../../../assets/iucn_status.svg", import.meta.url)
+  .href;
 </script>
 
 <style lang="scss" scoped>
