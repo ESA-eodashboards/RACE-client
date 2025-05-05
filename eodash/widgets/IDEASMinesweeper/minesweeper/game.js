@@ -12,19 +12,28 @@ import {
 } from "./index";
 
 export default class Minesweeper {
+  /**
+   *
+   * @param {import("ol/Map").default} map
+   * @param {*} options
+   */
   constructor(map, options) {
     this.vectorSource = new VectorSource();
     this.vectorLayer = new VectorLayer({
       source: this.vectorSource,
-      name: "Minesweep game board",
+      //@ts-expect-error
+      title: "Minesweep game board",
     });
+
     this.map = map;
     this.options = options;
     this.game = new HexSweeperGame(options);
 
     map.addLayer(this.vectorLayer);
     this.setupGame();
+    /** @type {Function[]} */
     this.clickEventHandlers = [];
+    /** @type {Function[]} */
     this.contextmenuEventHandlers = [];
   }
 
@@ -36,12 +45,7 @@ export default class Minesweeper {
     this.drawGameBoard();
     this.addEventListeners();
 
-    this.updateAllTiles(
-      this.game,
-      this.grid,
-      this.vectorSource,
-      this.vectorLayer,
-    );
+    this.updateAllTiles();
   }
 
   get mineCount() {
@@ -93,7 +97,10 @@ export default class Minesweeper {
   }
 
   addEventListeners() {
-    const handleMapClickHandler = ((e) =>
+    /**
+     * @param {import("ol/MapBrowserEvent").default<any>} e
+     */
+    const handleMapClickHandler = (e) =>
       handleMapClick(
         e,
         this.game,
@@ -101,34 +108,44 @@ export default class Minesweeper {
         this.vectorSource,
         // Pass in our callback to work with our state
         this.updateTile.bind(this),
-        // eslint-disable-next-line no-extra-bind
-      )).bind(this);
+      );
     this.clickEventHandlers.push(handleMapClickHandler);
-
-    const handleMapRightClickHandler = ((e) =>
+    /**
+     * @param {import("ol/MapBrowserEvent").default<any>} e
+     */
+    const handleMapRightClickHandler = (e) =>
       handleMapRightClick(
         e,
         this.game,
         this.grid,
         this.vectorSource,
         this.vectorLayer,
-        // eslint-disable-next-line no-extra-bind
-      )).bind(this);
+      );
+
     this.contextmenuEventHandlers.push(handleMapRightClickHandler);
 
     this.map.on("click", handleMapClickHandler);
+    //@ts-expect-error
     this.map.on("contextmenu", handleMapRightClickHandler);
   }
 
   removeEventListeners() {
     this.clickEventHandlers.forEach((h) => {
+      //@ts-expect-error
       this.map.un("click", h);
     });
     this.contextmenuEventHandlers.forEach((h) => {
+      //@ts-expect-error
       this.map.un("contextmenu", h);
     });
   }
 
+  /**
+   *
+   * @param {*} x
+   * @param {*} y
+   * @returns
+   */
   updateTile(x, y) {
     return updateTileVisuals(
       x,

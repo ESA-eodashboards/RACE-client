@@ -27,7 +27,7 @@
                 tiles corresponding to areas with high
                 <span v-if="indicator === 'IND1_1_minesweeper'"
                   >health risks</span
-                ><span v-else-if="indicator === 'IND2_1_minesweeper'"
+                ><span v-if="indicator === 'IND2_1_minesweeper'"
                   >biodiversity</span
                 >. Your <b>score</b> is based on
                 <b>the percentage of uncovered area and time spent</b> at the
@@ -217,6 +217,13 @@ onMounted(() => {
 const emit = defineEmits(["close"]);
 
 watch(() => bbox, populateSpeciesList);
+watch(
+  () => isEnabled,
+  (newVal) => {
+    isActive.value = newVal;
+  },
+);
+
 /** @type {import("vue").Ref<any[]>} */
 const sortedSpecies = ref([]);
 
@@ -224,6 +231,7 @@ const copyBtn = useTemplateRef("copy-btn");
 
 function close() {
   emit("close");
+  isActive.value = false;
 }
 function start() {
   document.dispatchEvent(new Event("minesweeper:start"));

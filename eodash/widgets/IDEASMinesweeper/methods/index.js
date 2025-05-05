@@ -2,11 +2,12 @@ import { store } from "@eodash/eodash";
 import Minesweeper from "../minesweeper/game";
 import { getRandomBoundingBox, findIntersections } from "../minesweeper";
 import { transformExtent } from "ol/proj";
+import { reactive, toRaw } from "vue";
 
 /**
  * @type {import("../../types.ts").Minesweeper}
  */
-export const minesweeper = {
+export const minesweeper = reactive({
   isEnabled: false,
   isDialogEnabled: false,
   isLoaded: false,
@@ -50,7 +51,7 @@ export const minesweeper = {
     ],
   },
   elapsedSeconds: 0,
-};
+});
 
 async function winMineSweep() {
   if (!minesweeper.timer) {
@@ -68,18 +69,22 @@ function gameoverMineSweep() {
   minesweeper.mode = "gameover";
   minesweeper.isDialogEnabled = true;
 }
-export function restartMineSweep() {
+export async function restartMineSweep() {
   console.log("Minesweeper::Restart");
   tearDownMinesweeper();
 
   minesweeper.mode = "start";
 
-  window.setTimeout(() => {
-    setupMinesweeper();
-  }, 1000);
+  // window.setTimeout(async() => {
+  await setupMinesweeper();
+  // }, 1000);
 }
+/**
+ *
+ * @returns {import("ol/Map").default}
+ */
 function getMapInstance() {
-  return { map: store.states.mapEl.value?.map };
+  return store.states.mapEl.value?.map;
 }
 function continueMineSweepCounter() {
   if (!minesweeper.game?.isGameCompleted) {
@@ -102,7 +107,7 @@ export async function setupMinesweeper() {
   document.addEventListener("minesweeper:gameover", gameoverMineSweep);
   document.addEventListener("minesweeper:restart", restartMineSweep);
 
-  const { map } = getMapInstance();
+  const map = getMapInstance();
   let seedString = new URLSearchParams(window.location.search).get("seed");
   if (!seedString) {
     const date = new Date();
@@ -132,14 +137,16 @@ export async function setupMinesweeper() {
   while (!wasIntersectionFound) {
     const i = 0;
     seedString += `${i}`;
-    new URLSearchParams(window.location.search).set("seed", seedString);
+    const windowURL = new URL(window.location.href);
+    windowURL.searchParams.set("seed", seedString);
+    window.history.replaceState({}, "", windowURL);
+
     const newBbox = getRandomBoundingBox(
       location.bbox,
       location.horizontalExtent,
       seedString,
     );
 
-    // eslint-disable-next-line
     const newIntersections = await findIntersections(newBbox, geojson);
 
     if (newIntersections.length > 0) {
@@ -168,8 +175,9 @@ export async function setupMinesweeper() {
 
 export function tearDownMinesweeper() {
   if (minesweeper.game?.vectorLayer) {
-    const { map } = getMapInstance();
-    map.removeLayer(minesweeper.game.vectorLayer);
+    const map = getMapInstance();
+    map.removeLayer(toRaw(minesweeper.game.vectorLayer));
+    console.log("map", map.getLayers().getArray());
   }
   if (minesweeper.game) {
     minesweeper.game.removeEventListeners();

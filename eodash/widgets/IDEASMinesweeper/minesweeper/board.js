@@ -327,7 +327,9 @@ export default class HexSweeperGame {
           !this.board[ny][nx].isMine &&
           this.board[ny][nx].adjacentMines === 0
         ) {
-          coordinatePairs = coordinatePairs.concat(this.revealTile(nx, ny));
+          coordinatePairs = coordinatePairs.concat(
+            this.revealTile(nx, ny) ?? [],
+          );
         } else if (!this.board[ny][nx].isMine) {
           // If the neighbor is not a mine but has adjacent mines,
           // reveal it but do not recurse further.
