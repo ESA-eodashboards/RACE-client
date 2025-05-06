@@ -19,5 +19,12 @@
     "types": ["vuetify"]
   },
   "include": ["**/*.js", "**/*.vue", "**/*.d.ts", "**/*.ts"],
-  "exclude": ["node_modules", ".eodash", "public", "**/cache/**", "**/dist/**"]
+  "exclude": [
+    "node_modules",
+    ".eodash",
+    "public",
+    "**/cache/**",
+    "**/dist/**",
+    "eodash.config.js"
+  ]
 }

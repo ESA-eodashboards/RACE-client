@@ -1,13 +1,14 @@
 <template>
-  <div class="species-list mt-3">
-    <p>
-      These are the species found in biodiversity hotspots for the chosen area.
-      <br />
-      Click on the images to enlarge them and learn more about each species.
-    </p>
+  <p>
+    These are the species found in biodiversity hotspots for the chosen area.
+    <br />
+    Click on the images to enlarge them and learn more about each species.
+  </p>
+
+  <v-container class="mt-3">
     <dl>
-      <div
-        class="species v-row"
+      <v-row
+        class="species justify-space-between align-center"
         v-for="s in species"
         :key="s.species"
         style="margin-bottom: 16px"
@@ -47,15 +48,15 @@
             {{ s.count }}
           </span>
         </div>
-      </div>
+      </v-row>
     </dl>
     <p>The conservation status indicates how endangered each species is.</p>
     <img
       style="max-width: 60%; margin: 0 20%"
-      :src="IUCNLegend"
+      :src="IUCNLegendPng"
       alt="IUCN Endangered Species Index legend"
     />
-  </div>
+  </v-container>
 </template>
 
 <script setup>
@@ -64,6 +65,8 @@ import {
   getIucnShorthand,
   getIucnTextColor,
 } from "../methods/species-list";
+import IUCNLegendPng from "../../../assets/iucn_status.svg";
+
 const props = defineProps({
   species: {
     /**
@@ -73,17 +76,13 @@ const props = defineProps({
     required: true,
   },
 });
-
-const IUCNLegend = new URL("../../../assets/iucn_status.svg", import.meta.url)
-  .href;
 </script>
 
 <style lang="scss" scoped>
+// .species-list{
+
+// }
 .species {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 16px;
   min-width: 280px;
 

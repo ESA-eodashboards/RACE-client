@@ -3,6 +3,7 @@ import Minesweeper from "../minesweeper/game";
 import { getRandomBoundingBox, findIntersections } from "../minesweeper";
 import { transformExtent } from "ol/proj";
 import { reactive, toRaw } from "vue";
+import geojson from "../../../assets/europe_and_iceland_country_borders_fixed.json";
 
 /**
  * @type {import("../../types.ts").Minesweeper}
@@ -121,14 +122,6 @@ export async function setupMinesweeper() {
     seedString,
   );
   minesweeper.bbox = bbox;
-
-  const res = await fetch(
-    new URL(
-      "../../../assets/europe_and_iceland_country_borders_fixed.geojson",
-      import.meta.url,
-    ).href,
-  );
-  const geojson = await res.json();
 
   const intersections = await findIntersections(bbox, geojson);
 

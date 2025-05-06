@@ -4,6 +4,7 @@ export default defineConfig({
   entryPoint: "./eodash/main.js",
   widgets: "./eodash/widgets",
   lib: true,
+  publicDir: false,
   vite: {
     optimizeDeps: {
       include: [

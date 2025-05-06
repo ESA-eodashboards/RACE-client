@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 export interface Specie {
   species: string;
   common_name: string;
@@ -13,7 +15,7 @@ export interface Minesweeper {
   isDialogEnabled: boolean;
   isLoaded: boolean;
   mode: string;
-  game: Record<string, any> | null;
+  game: import("./IDEASMinesweeper/minesweeper/game").default | null;
   timer: number | null;
   bbox: number[];
   minesweeperOptions: {
