@@ -30,7 +30,7 @@ export default class HexSweeperGame {
    * @param {number} options.width - The width of the game board (in hex cells).
    * @param {number} options.height - The height of the game board (in hex cells).
    * @param {number} options.size - The size of the hex cells.
-   * @param {import("../../types").Locations} options.locations - The locations of the game board.
+   * @param {import("../../../types").Locations} options.locations - The locations of the game board.
    * @param {number} options.selectedLocationIndex - The index of the selected location.
    * @param {Array<number>} options.bbox - The bounding box of the game board.
    * @param {string} options.minColor - The minimum color for the game board.

@@ -15,7 +15,7 @@ export interface Minesweeper {
   isDialogEnabled: boolean;
   isLoaded: boolean;
   mode: string;
-  game: import("./IDEASMinesweeper/minesweeper/game").default | null;
+  game: import("./IDEASMinesweeper/methods/hexsweeper/game").default | null;
   timer: number | null;
   bbox: number[];
   minesweeperOptions: {

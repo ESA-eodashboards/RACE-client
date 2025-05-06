@@ -1,6 +1,6 @@
 import { store } from "@eodash/eodash";
-import Minesweeper from "../minesweeper/game";
-import { getRandomBoundingBox, findIntersections } from "../minesweeper";
+import Minesweeper from "./hexsweeper/game";
+import { getRandomBoundingBox, findIntersections } from "./hexsweeper";
 import { transformExtent } from "ol/proj";
 import { reactive, toRaw } from "vue";
 import geojson from "../../../assets/europe_and_iceland_country_borders_fixed.json";
@@ -54,53 +54,6 @@ export const minesweeper = reactive({
   elapsedSeconds: 0,
 });
 
-async function winMineSweep() {
-  if (!minesweeper.timer) {
-    return;
-  }
-  clearInterval(minesweeper.timer);
-  minesweeper.mode = "win";
-  minesweeper.isDialogEnabled = true;
-}
-function gameoverMineSweep() {
-  if (!minesweeper.timer) {
-    return;
-  }
-  clearInterval(minesweeper.timer);
-  minesweeper.mode = "gameover";
-  minesweeper.isDialogEnabled = true;
-}
-export async function restartMineSweep() {
-  console.log("Minesweeper::Restart");
-  tearDownMinesweeper();
-
-  minesweeper.mode = "start";
-
-  // window.setTimeout(async() => {
-  await setupMinesweeper();
-  // }, 1000);
-}
-/**
- *
- * @returns {import("ol/Map").default}
- */
-function getMapInstance() {
-  return store.states.mapEl.value?.map;
-}
-function continueMineSweepCounter() {
-  if (!minesweeper.game?.isGameCompleted) {
-    return;
-  }
-  document.dispatchEvent(new Event("minesweeper:win"));
-}
-function startMineSweepCounter() {
-  minesweeper.elapsedSeconds = 0;
-  console.info("Minesweeper::StartTimer");
-  minesweeper.timer = setInterval(() => {
-    minesweeper.elapsedSeconds += 1;
-  }, 1000);
-}
-
 export async function setupMinesweeper() {
   document.addEventListener("minesweeper:start", startMineSweepCounter);
   document.addEventListener("minesweeper:continue", continueMineSweepCounter);
@@ -111,7 +64,7 @@ export async function setupMinesweeper() {
   const map = getMapInstance();
   let seedString = new URLSearchParams(window.location.search).get("seed");
   if (!seedString) {
-    const date = new Date();
+    const date = new Date(store.states.datetime.value); ;
     seedString = date.toDateString();
   }
   const location = minesweeper.minesweeperOptions.locations[0];
@@ -130,10 +83,6 @@ export async function setupMinesweeper() {
   while (!wasIntersectionFound) {
     const i = 0;
     seedString += `${i}`;
-    const windowURL = new URL(window.location.href);
-    windowURL.searchParams.set("seed", seedString);
-    window.history.replaceState({}, "", windowURL);
-
     const newBbox = getRandomBoundingBox(
       location.bbox,
       location.horizontalExtent,
@@ -186,4 +135,53 @@ export function tearDownMinesweeper() {
   document.removeEventListener("minesweeper:win", winMineSweep);
   document.removeEventListener("minesweeper:gameover", gameoverMineSweep);
   document.removeEventListener("minesweeper:restart", restartMineSweep);
+}
+
+export async function restartMineSweep() {
+  console.log("Minesweeper::Restart");
+  tearDownMinesweeper();
+
+  minesweeper.mode = "start";
+
+  // window.setTimeout(async() => {
+  await setupMinesweeper();
+  // }, 1000);
+}
+
+async function winMineSweep() {
+  if (!minesweeper.timer) {
+    return;
+  }
+  clearInterval(minesweeper.timer);
+  minesweeper.mode = "win";
+  minesweeper.isDialogEnabled = true;
+}
+function gameoverMineSweep() {
+  if (!minesweeper.timer) {
+    return;
+  }
+  clearInterval(minesweeper.timer);
+  minesweeper.mode = "gameover";
+  minesweeper.isDialogEnabled = true;
+}
+
+/**
+ *
+ * @returns {import("ol/Map").default}
+ */
+function getMapInstance() {
+  return store.states.mapEl.value?.map;
+}
+function continueMineSweepCounter() {
+  if (!minesweeper.game?.isGameCompleted) {
+    return;
+  }
+  document.dispatchEvent(new Event("minesweeper:win"));
+}
+function startMineSweepCounter() {
+  minesweeper.elapsedSeconds = 0;
+  console.info("Minesweeper::StartTimer");
+  minesweeper.timer = setInterval(() => {
+    minesweeper.elapsedSeconds += 1;
+  }, 1000);
 }

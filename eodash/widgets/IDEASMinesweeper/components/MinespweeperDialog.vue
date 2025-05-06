@@ -170,7 +170,7 @@
 </template>
 
 <script setup>
-import { getSpeciesList } from "../minesweeper/utils";
+import { getSpeciesList } from "../methods/hexsweeper/utils";
 import SpeciesList from "./SpeciesList.vue";
 import { onMounted, ref, useTemplateRef, watch } from "vue";
 import { store } from "@eodash/eodash";

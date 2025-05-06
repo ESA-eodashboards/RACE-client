@@ -197,9 +197,7 @@ export default createEodash({
           //@ts-expect-error
           defineWidget(collection) {
             return (
-              ["IDEAS", "minesweeper"].some((c) =>
-                collection?.id.includes(c),
-              ) && {
+              ["IDEAS2_wildlife_minesweeper", "IDEAS1_hopi_minesweeper"].includes(collection?.id ?? "") && {
                 id: "Minesweeper",
                 layout: { x: 4, y: 0, w: 3, h: 1 },
                 title: "Minesweeper",
