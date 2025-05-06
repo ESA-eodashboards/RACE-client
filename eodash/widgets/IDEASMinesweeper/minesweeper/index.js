@@ -241,6 +241,7 @@ const getTileStyle = (tile, minValue, maxValue, minColor, maxColor) => {
 
   return style;
 };
+
 /**
  *
  * @param {*} x
@@ -333,7 +334,6 @@ const handleMapClick = (
     return;
   }
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const [xx, yy] of revealedCoordsList) {
     hasUncoveredMine = hasUncoveredMine || game.get(xx, yy).isMine;
     updateTileVisualsCallback(xx, yy, grid, vectorSource, game);
@@ -352,6 +352,7 @@ const handleMapClick = (
     document.dispatchEvent(new Event("minesweeper:continue"));
   }
 };
+
 /**
  *
  * @param {*} e

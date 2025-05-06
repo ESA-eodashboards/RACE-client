@@ -1,6 +1,7 @@
 import { fromUrl } from "geotiff";
 import proj4 from "proj4";
 import getPercentile from "./utils";
+import { reactive } from "vue";
 
 const EVEN_NEIGHBOR_OFFSETS = [
   [-1, -1],
@@ -45,7 +46,7 @@ export default class HexSweeperGame {
     this.selectedLocationIndex = options.selectedLocationIndex;
     this.bbox = options.bbox;
     /** @type {any[][]} */
-    this.board = [];
+    this.board = reactive([]);
     /** @type {number[]} */
     this.center = [];
     this.gameSize = null;

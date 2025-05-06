@@ -1,172 +1,172 @@
 <template>
-  <span>
-    <div class="modal-success">
-      <v-dialog v-model="isActive" width="500">
-        <template #activator="{ props }">
-          <v-btn v-bind="props">
-            <span> 💣 Open game dialog </span>
-          </v-btn>
-        </template>
+  <div class="modal-success d-flex flex-column fill-height fill-width">
+    <v-dialog v-model="isActive" width="500">
+      <template #activator="{ props }">
+        <v-btn
+          color="secondary"
+          height="100%"
+          class="btn-remaining align-strech"
+          v-bind="props"
+        >
+          💣 Open game dialog
+        </v-btn>
+      </template>
 
-        <!-- Default Slot for Dialog Content -->
-        <v-card v-show="mode === 'start'">
-          <v-card-title style="text-align: center" class="py-6">
-            💣 Hexagonal Minesweeper Game
-          </v-card-title>
-          <v-card-text>
-            <p>
-              Welcome to the Minesweeper game mode! For more information look at
-              the Description in the Information panel!
-            </p>
-            <p><b>Quick overview:</b><br /></p>
+      <!-- Default Slot for Dialog Content -->
+      <v-card v-show="mode === 'start'">
+        <v-card-title style="text-align: center" class="py-6">
+          💣 Hexagonal Minesweeper Game
+        </v-card-title>
+        <v-card-text>
+          <p>
+            Welcome to the Minesweeper game mode! For more information look at
+            the Description in the Information panel!
+          </p>
+          <p><b>Quick overview:</b><br /></p>
 
-            <ul>
-              <li>
-                The goal of the game is to <b>UNCOVER (left-click)</b> most
-                tiles possible that do not have a 'mine', or in other words,
-                tiles corresponding to areas with high
-                <span v-if="indicator === 'IND1_1_minesweeper'"
-                  >health risks</span
-                ><span v-if="indicator === 'IND2_1_minesweeper'"
-                  >biodiversity</span
-                >. Your <b>score</b> is based on
-                <b>the percentage of uncovered area and time spent</b> at the
-                end of the game.
-              </li>
-              <li>
-                You can <b>FLAG (right-click)</b> the tiles with 'mines' (i.e.
-                areas with very high health risk) to indicate they have a
-                'mine'.
-              </li>
-              <li>
-                <b>Hint:</b> Use visible layers to guide your exploration and
-                uncover new tiles (left-click).
-              </li>
-            </ul>
-            <p>
-              A new location is available <b>daily</b> — come back tomorrow to
-              explore more!
-            </p>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn class="green white--text" text @click="start()"
-              >Start Game</v-btn
+          <ul>
+            <li>
+              The goal of the game is to <b>UNCOVER (left-click)</b> most tiles
+              possible that do not have a 'mine', or in other words, tiles
+              corresponding to areas with high
+              <span v-if="indicator === 'IND1_1_minesweeper'">health risks</span
+              ><span v-if="indicator === 'IND2_1_minesweeper'"
+                >biodiversity</span
+              >. Your <b>score</b> is based on
+              <b>the percentage of uncovered area and time spent</b> at the end
+              of the game.
+            </li>
+            <li>
+              You can <b>FLAG (right-click)</b> the tiles with 'mines' (i.e.
+              areas with very high health risk) to indicate they have a 'mine'.
+            </li>
+            <li>
+              <b>Hint:</b> Use visible layers to guide your exploration and
+              uncover new tiles (left-click).
+            </li>
+          </ul>
+          <p>
+            A new location is available <b>daily</b> — come back tomorrow to
+            explore more!
+          </p>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn class="green white--text" text @click="start()"
+            >Start Game</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+
+      <v-card v-show="mode === 'gameover'">
+        <v-card-title style="text-align: center" class="py-6"
+          >Oh no!</v-card-title
+        >
+        <v-card-text>
+          <div class="game-stats">
+            <div class="item">
+              <span class="name">🌟 TOTAL UNCOVERED AREA</span>
+              <span class="value">
+                {{
+                  Math.round(
+                    (game?.game?.getUncoveredAreaPercent() ?? 0) * 100,
+                  )
+                }}%
+              </span>
+            </div>
+
+            <div class="item">
+              <span class="name">⬡ NUMBER OF CELLS</span>
+              <span class="value">{{ game?.game?.fieldCount }}</span>
+            </div>
+
+            <div class="item">
+              <span class="name">💣 NUMBER OF MINES</span>
+              <span class="value">{{ game?.game?.mineCount }}</span>
+            </div>
+            <div v-if="enableSpeciesDisplay">
+              <h1 class="pa-2" v-if="mode === 'gameover'">Species Info</h1>
+              <SpeciesList
+                v-if="mode === 'gameover'"
+                :species="sortedSpecies"
+              />
+            </div>
+
+            <v-btn
+              style="font-weight: bold"
+              ref="copy-btn"
+              color="secondary"
+              text
+              @click="copyStatsToClipboard()"
+              >COPY RESULTS</v-btn
             >
-          </v-card-actions>
-        </v-card>
-
-        <v-card v-show="mode === 'gameover'">
-          <v-card-title style="text-align: center" class="py-6"
-            >Oh no!</v-card-title
-          >
-          <v-card-text>
-            <div class="game-stats">
-              <div class="item">
-                <span class="name">🌟 TOTAL UNCOVERED AREA</span>
-                <span class="value">
-                  {{
-                    Math.round(
-                      (game?.game?.getUncoveredAreaPercent() ?? 0) * 100,
-                    )
-                  }}%
-                </span>
-              </div>
-
-              <div class="item">
-                <span class="name">⬡ NUMBER OF CELLS</span>
-                <span class="value">{{ game?.game?.fieldCount }}</span>
-              </div>
-
-              <div class="item">
-                <span class="name">💣 NUMBER OF MINES</span>
-                <span class="value">{{ game?.game?.mineCount }}</span>
-              </div>
-              <div v-if="enableSpeciesDisplay">
-                <h1 class="pa-2" v-if="mode === 'gameover'">Species Info</h1>
-                <SpeciesList
-                  v-if="mode === 'gameover'"
-                  :species="sortedSpecies"
-                />
-              </div>
-
-              <v-btn
-                style="font-weight: bold"
-                ref="copy-btn"
-                color="secondary"
-                text
-                @click="copyStatsToClipboard()"
-                >COPY RESULTS</v-btn
-              >
-              <p>Share your score on social media!</p>
-              <p>
-                <b>Come back tomorrow</b> for a new challenge and explore a
-                fresh location!
-              </p>
-            </div>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn text @click="newGame()">Restart Game</v-btn>
-            <v-btn class="primary" text @click="close()">Continue</v-btn>
-          </v-card-actions>
-        </v-card>
-
-        <v-card v-show="mode === 'win'">
-          <v-card-title style="text-align: center" class="py-6"
-            >Woo-hoo! 🎉</v-card-title
-          >
-          <v-card-text>
-            Congratulations, you uncovered all fields without stepping on a
-            mine!
-            <div class="game-stats">
-              <div class="item">
-                <span class="name">🌟 TOTAL ELAPSED TIME</span>
-                <span class="value">{{ elapsedSeconds }}s</span>
-              </div>
-
-              <div class="item">
-                <span class="name">⬡ NUMBER OF CELLS</span>
-                <span class="value">{{ game?.game?.fieldCount }}</span>
-              </div>
-
-              <div class="item">
-                <span class="name">💣 NUMBER OF MINES</span>
-                <span class="value">{{ game?.game?.mineCount }}</span>
-              </div>
-              <div v-if="enableSpeciesDisplay">
-                <h2 style="margin-top: 24px; margin-bottom: 18px">
-                  Discovered species:
-                </h2>
-
-                <SpeciesList v-if="mode === 'win'" :species="sortedSpecies" />
-              </div>
-              <v-btn
-                style="font-weight: bold"
-                ref="copy-btn"
-                color="secondary"
-                text
-                @click="copyStatsToClipboard()"
-                >Copy to Clipboard</v-btn
-              >
-            </div>
             <p>Share your score on social media!</p>
             <p>
               <b>Come back tomorrow</b> for a new challenge and explore a fresh
               location!
             </p>
-          </v-card-text>
+          </div>
+        </v-card-text>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn text @click="newGame()">Restart Game</v-btn>
-            <v-btn class="primary" text @click="close()">Continue</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </div>
-  </span>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text @click="newGame()">Restart Game</v-btn>
+          <v-btn class="primary" text @click="close()">Continue</v-btn>
+        </v-card-actions>
+      </v-card>
+
+      <v-card v-show="mode === 'win'">
+        <v-card-title style="text-align: center" class="py-6"
+          >Woo-hoo! 🎉</v-card-title
+        >
+        <v-card-text>
+          Congratulations, you uncovered all fields without stepping on a mine!
+          <div class="game-stats">
+            <div class="item">
+              <span class="name">🌟 TOTAL ELAPSED TIME</span>
+              <span class="value">{{ elapsedSeconds }}s</span>
+            </div>
+
+            <div class="item">
+              <span class="name">⬡ NUMBER OF CELLS</span>
+              <span class="value">{{ game?.game?.fieldCount }}</span>
+            </div>
+
+            <div class="item">
+              <span class="name">💣 NUMBER OF MINES</span>
+              <span class="value">{{ game?.game?.mineCount }}</span>
+            </div>
+            <div v-if="enableSpeciesDisplay">
+              <h2 style="margin-top: 24px; margin-bottom: 18px">
+                Discovered species:
+              </h2>
+
+              <SpeciesList v-if="mode === 'win'" :species="sortedSpecies" />
+            </div>
+            <v-btn
+              style="font-weight: bold"
+              ref="copy-btn"
+              color="secondary"
+              text
+              @click="copyStatsToClipboard()"
+              >Copy to Clipboard</v-btn
+            >
+          </div>
+          <p>Share your score on social media!</p>
+          <p>
+            <b>Come back tomorrow</b> for a new challenge and explore a fresh
+            location!
+          </p>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text @click="newGame()">Restart Game</v-btn>
+          <v-btn class="primary" text @click="close()">Continue</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 
 <script setup>
@@ -291,6 +291,9 @@ function copyStatsToClipboard() {
 </script>
 
 <style lang="scss" scoped>
+.btn-remaining {
+  border-radius: 0px 0px 4px 4px !important;
+}
 .eodash-newsletter-banner {
   position: relative;
 

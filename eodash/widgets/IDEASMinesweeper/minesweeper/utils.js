@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // Function to calculate the xx th percentile
 /**
  *
@@ -33,16 +35,18 @@ function isWithinBounds(point, bbox) {
  */
 export async function getSpeciesList(bbox) {
   // Get wildlife species index
-  const r1 = await fetch(
-    "https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator2/Species_Index_Images_v2.json",
-  );
-  const speciesIndex = await r1.json();
+  const speciesIndex = await axios
+    .get(
+      "https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator2/Species_Index_Images_v2.json",
+    )
+    .then((response) => response.data);
 
   // Get locations of species
-  const r2 = await fetch(
-    "https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator2/Europe_characteristic_species.geojson",
-  );
-  const speciesLocations = await r2.json();
+  const speciesLocations = await axios
+    .get(
+      "https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator2/Europe_characteristic_species.geojson",
+    )
+    .then((response) => response.data);
 
   const accumulatedSpecies = speciesLocations.features
     //@ts-expect-error
