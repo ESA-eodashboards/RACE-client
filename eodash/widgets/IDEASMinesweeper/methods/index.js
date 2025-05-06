@@ -53,8 +53,13 @@ export const minesweeper = reactive({
   },
   elapsedSeconds: 0,
 });
+/**
+ *
+ * @param {import("../../types.ts").MinesweeperOptions} minesweeperOptions
+ */
+export async function setupMinesweeper(minesweeperOptions) {
+  minesweeper.minesweeperOptions = minesweeperOptions;
 
-export async function setupMinesweeper() {
   document.addEventListener("minesweeper:start", startMineSweepCounter);
   document.addEventListener("minesweeper:continue", continueMineSweepCounter);
   document.addEventListener("minesweeper:win", winMineSweep);
@@ -64,7 +69,7 @@ export async function setupMinesweeper() {
   const map = getMapInstance();
   let seedString = new URLSearchParams(window.location.search).get("seed");
   if (!seedString) {
-    const date = new Date(store.states.datetime.value); ;
+    const date = new Date(store.states.datetime.value);
     seedString = date.toDateString();
   }
   const location = minesweeper.minesweeperOptions.locations[0];
@@ -142,10 +147,11 @@ export async function restartMineSweep() {
   tearDownMinesweeper();
 
   minesweeper.mode = "start";
-
-  // window.setTimeout(async() => {
-  await setupMinesweeper();
-  // }, 1000);
+  if (!minesweeper.minesweeperOptions) {
+    console.error("Minesweeper options are not set");
+    return;
+  }
+  await setupMinesweeper(minesweeper.minesweeperOptions);
 }
 
 async function winMineSweep() {
@@ -169,6 +175,7 @@ function gameoverMineSweep() {
  *
  * @returns {import("ol/Map").default}
  */
+
 function getMapInstance() {
   return store.states.mapEl.value?.map;
 }

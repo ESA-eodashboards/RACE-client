@@ -18,28 +18,7 @@ export interface Minesweeper {
   game: import("./IDEASMinesweeper/methods/hexsweeper/game").default | null;
   timer: number | null;
   bbox: number[];
-  minesweeperOptions: {
-    enableSpeciesDisplay: boolean;
-    size: number;
-    geotiff: { projection: string; url: string };
-    selectedLocationIndex: number;
-    minColor: {
-      r: number;
-      g: number;
-      b: number;
-      a: number;
-    };
-    maxColor: {
-      // light green
-      r: number;
-      g: number;
-      b: number;
-      a: number;
-    };
-    minValue: 1;
-    maxValue: 8;
-    locations: Locations;
-  };
+  minesweeperOptions: MinesweeperOptions | null;
   elapsedSeconds: number;
 }
 export type Locations = {
@@ -49,3 +28,26 @@ export type Locations = {
   horizontalExtent: number;
   isMineCondition: (val: number) => boolean;
 }[];
+
+export interface MinesweeperOptions {
+  enableSpeciesDisplay: boolean;
+  size: number;
+  geotiff: { projection: string; url: string };
+  selectedLocationIndex: number;
+  minColor: {
+    r: number;
+    g: number;
+    b: number;
+    a: number;
+  };
+  maxColor: {
+    // light green
+    r: number;
+    g: number;
+    b: number;
+    a: number;
+  };
+  minValue: 1;
+  maxValue: 8;
+  locations: Locations;
+}

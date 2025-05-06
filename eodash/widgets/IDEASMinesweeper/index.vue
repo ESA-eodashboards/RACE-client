@@ -11,7 +11,7 @@
       :is-enabled="minesweeper.isDialogEnabled"
       :bbox="minesweeper.bbox"
       :enableSpeciesDisplay="
-        minesweeper.minesweeperOptions.enableSpeciesDisplay
+        minesweeper.minesweeperOptions?.enableSpeciesDisplay
       "
       @close="minesweeper.isDialogEnabled = false"
     />
@@ -21,8 +21,15 @@
 import { watch, computed, onUnmounted } from "vue";
 import MinesweeperDialog from "./components/MinespweeperDialog.vue";
 import { minesweeper, setupMinesweeper, tearDownMinesweeper } from "./methods";
+const { minesweeperOptions } = defineProps({
+  minesweeperOptions: {
+    /** @type {import("vue").PropType<import("../types").MinesweeperOptions>} */
+    type: Object,
+    required: true,
+  },
+});
 
-await setupMinesweeper();
+await setupMinesweeper(minesweeperOptions);
 const minesLeft = computed(() =>
   minesweeper.game
     ? minesweeper.game.mineCount - minesweeper.game.flagCount
@@ -30,10 +37,10 @@ const minesLeft = computed(() =>
 );
 
 watch(
-  () => minesweeper.minesweeperOptions,
+  () => minesweeperOptions,
   async () => {
     tearDownMinesweeper();
-    await setupMinesweeper();
+    await setupMinesweeper(minesweeperOptions);
   },
 );
 onUnmounted(() => {
