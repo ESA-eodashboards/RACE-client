@@ -18,7 +18,7 @@
   </span>
 </template>
 <script setup>
-import { watch, computed } from "vue";
+import { watch, computed, onUnmounted } from "vue";
 import MinesweeperDialog from "./components/MinespweeperDialog.vue";
 import { minesweeper, setupMinesweeper, tearDownMinesweeper } from "./methods";
 
@@ -36,6 +36,9 @@ watch(
     await setupMinesweeper();
   },
 );
+onUnmounted(() => {
+  tearDownMinesweeper();
+});
 </script>
 <style scoped>
 .btn-open {
