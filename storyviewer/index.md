@@ -2,7 +2,7 @@
 layout: page
 ---
 
-<script setup>
+<script setup client-only>
     import { onMounted } from 'vue';
     import { data } from '../stories/config.data.js';
     import { withBase } from 'vitepress';
