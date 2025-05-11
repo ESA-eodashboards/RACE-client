@@ -19,7 +19,9 @@
 </template>
 <script setup>
 import { watch, computed, onUnmounted } from "vue";
-import MinesweeperDialog from "./components/MinespweeperDialog.vue";
+import { store } from "@eodash/eodash";
+
+import MinesweeperDialog from "./components/MinesweeperDialog.vue";
 import { minesweeper, setupMinesweeper, tearDownMinesweeper } from "./methods";
 const { minesweeperOptions } = defineProps({
   minesweeperOptions: {
@@ -37,10 +39,12 @@ const minesLeft = computed(() =>
 );
 
 watch(
-  () => minesweeperOptions,
+  [() => minesweeperOptions, () => store.states.datetime.value],
   async () => {
     tearDownMinesweeper();
-    await setupMinesweeper(minesweeperOptions);
+    setTimeout(() => {
+      setupMinesweeper(minesweeperOptions);
+    }, 1000);
   },
 );
 onUnmounted(() => {

@@ -33,7 +33,6 @@ export interface MinesweeperOptions {
   enableSpeciesDisplay: boolean;
   size: number;
   geotiff: { projection: string; url: string };
-  selectedLocationIndex: number;
   minColor: {
     r: number;
     g: number;

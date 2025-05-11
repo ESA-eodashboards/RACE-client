@@ -47,8 +47,9 @@
           </ul>
           <p>
             A new location is available <b>daily</b> — come back tomorrow to
-            explore more!
+            explore more !
           </p>
+          <p>Or use the <b>time selection</b> to browse through different game areas.</p>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>

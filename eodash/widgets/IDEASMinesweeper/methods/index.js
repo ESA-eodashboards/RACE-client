@@ -4,7 +4,7 @@ import { getRandomBoundingBox, findIntersections } from "./hexsweeper";
 import { transformExtent } from "ol/proj";
 import { reactive, toRaw } from "vue";
 import geojson from "../../../assets/europe_and_iceland_country_borders_fixed.json";
-
+let firstLoad = true;
 /**
  * @type {import("../../types.ts").Minesweeper}
  */
@@ -24,7 +24,6 @@ export const minesweeper = reactive({
       projection: "EPSG:4326",
       url: "https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator2/AR3_wildlife_1.tif",
     },
-    selectedLocationIndex: 0,
     minColor: {
       // dark green
       r: 0,
@@ -67,11 +66,13 @@ export async function setupMinesweeper(minesweeperOptions) {
   document.addEventListener("minesweeper:restart", restartMineSweep);
 
   const map = getMapInstance();
-  let seedString = new URLSearchParams(window.location.search).get("seed");
-  if (!seedString) {
-    const date = new Date(store.states.datetime.value);
-    seedString = date.toDateString();
+  let date = new Date();
+  // on first load take today's date
+  if (!firstLoad) {
+    // allow changing the game with a time selection
+    date = new Date(store.states.datetime.value);
   }
+  let seedString = date.toDateString();
   const location = minesweeper.minesweeperOptions.locations[0];
 
   const bbox = getRandomBoundingBox(
@@ -105,7 +106,6 @@ export async function setupMinesweeper(minesweeperOptions) {
   minesweeper.game = new Minesweeper(map, {
     ...minesweeper.minesweeperOptions,
     bbox: minesweeper.bbox,
-    selectedLocationIndex: 0, //TODO
   });
   minesweeper.isEnabled = true;
   minesweeper.isDialogEnabled = true;
@@ -116,14 +116,16 @@ export async function setupMinesweeper(minesweeperOptions) {
   );
   map.getView().fit(extent, {
     duration: 500,
-    // padding, TODO
   });
+  firstLoad = false;
 }
 
 export function tearDownMinesweeper() {
   if (minesweeper.game?.vectorLayer) {
     const map = getMapInstance();
-    map.removeLayer(toRaw(minesweeper.game.vectorLayer));
+    const analysisGroup = map.getLayers().getArray().find((i) => i.get('id') === "AnalysisGroup");
+    //@ts-expect-error
+    analysisGroup.getLayers().remove(toRaw(minesweeper.game.vectorLayer));
     console.log("map", map.getLayers().getArray());
   }
   if (minesweeper.game) {
@@ -144,7 +146,7 @@ export function tearDownMinesweeper() {
 
 export async function restartMineSweep() {
   console.log("Minesweeper::Restart");
-  tearDownMinesweeper();
+  await tearDownMinesweeper();
 
   minesweeper.mode = "start";
   if (!minesweeper.minesweeperOptions) {

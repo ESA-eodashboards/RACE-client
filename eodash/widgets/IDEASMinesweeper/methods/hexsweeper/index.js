@@ -116,7 +116,9 @@ function getRandomBoundingBox(worldBounds, horizontalExtent, seedString) {
  */
 const setupGrid = (game) => {
   const grid = new HexGrid({
-    Size: game.gameSize,
+    // Types library has a wrong type - fix on https://github.com/Siedlerchr/types-ol-ext/pull/181
+    //@ts-expect-error
+    size: game.gameSize,
     origin: game.center,
   });
   return {

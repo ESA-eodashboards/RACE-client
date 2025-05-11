@@ -216,7 +216,6 @@ export default createEodash({
                         projection: "EPSG:4326",
                         url: "https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator2/AR3_wildlife_1.tif",
                       },
-                      selectedLocationIndex: 0,
                       minColor: {
                         // dark green
                         r: 0,
@@ -266,7 +265,6 @@ export default createEodash({
                         projection: "EPSG:4326",
                         url: "https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator1/indicator1_v1_houhpi_Summer_europe_4326_b1.tif",
                       },
-                      selectedLocationIndex: 0,
                       locations: [
                         {
                           name: "Global Coverage",

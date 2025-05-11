@@ -31,7 +31,6 @@ export default class HexSweeperGame {
    * @param {number} options.height - The height of the game board (in hex cells).
    * @param {number} options.size - The size of the hex cells.
    * @param {import("../../../types").Locations} options.locations - The locations of the game board.
-   * @param {number} options.selectedLocationIndex - The index of the selected location.
    * @param {Array<number>} options.bbox - The bounding box of the game board.
    * @param {string} options.minColor - The minimum color for the game board.
    * @param {string} options.maxColor - The maximum color for the game board.
@@ -43,7 +42,6 @@ export default class HexSweeperGame {
     this.height = options.height;
     this.size = options.size;
     this.locations = options.locations;
-    this.selectedLocationIndex = options.selectedLocationIndex;
     this.bbox = options.bbox;
     /** @type {any[][]} */
     this.board = reactive([]);
@@ -95,7 +93,7 @@ export default class HexSweeperGame {
       const tiff = await fromUrl(options.geotiff.url);
       const image = await tiff.getImage();
       // get currently zoomed to location index
-      const location = this.locations[this.selectedLocationIndex];
+      const location = this.locations[0];
       // Get the randomized smaller bounding box calculated in the Map component.
       const { bbox } = this;
       // Convert geographic coordinates to distances using EPSG:3857
