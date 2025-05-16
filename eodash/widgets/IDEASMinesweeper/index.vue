@@ -30,8 +30,10 @@ const { minesweeperOptions } = defineProps({
     required: true,
   },
 });
+setTimeout(() => {
+  setupMinesweeper(minesweeperOptions);
+}, 250);
 
-await setupMinesweeper(minesweeperOptions);
 const minesLeft = computed(() =>
   minesweeper.game
     ? minesweeper.game.mineCount - minesweeper.game.flagCount

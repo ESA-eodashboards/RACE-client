@@ -29,8 +29,10 @@ export default class Minesweeper {
     this.options = options;
     this.game = new HexSweeperGame(options);
     const analysisGroup = map.getLayers().getArray().find((i) => i.get('id') === "AnalysisGroup");
-    //@ts-expect-error
-    analysisGroup.getLayers().push(this.vectorLayer);
+    if (analysisGroup) {
+      //@ts-expect-error
+      analysisGroup.getLayers().push(this.vectorLayer);
+    }
     this.setupGame();
     /** @type {Function[]} */
     this.clickEventHandlers = [];
