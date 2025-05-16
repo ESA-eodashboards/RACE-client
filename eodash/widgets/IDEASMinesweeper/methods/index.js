@@ -129,7 +129,6 @@ export function tearDownMinesweeper() {
     const analysisGroup = map.getLayers().getArray().find((i) => i.get('id') === "AnalysisGroup");
     //@ts-expect-error
     analysisGroup.getLayers().remove(toRaw(minesweeper.game.vectorLayer));
-    console.log("map", map.getLayers().getArray());
   }
   if (minesweeper.game) {
     minesweeper.game.removeEventListeners();
