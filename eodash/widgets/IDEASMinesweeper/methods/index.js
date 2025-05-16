@@ -57,6 +57,9 @@ export const minesweeper = reactive({
  * @param {import("../../types.ts").MinesweeperOptions} minesweeperOptions
  */
 export async function setupMinesweeper(minesweeperOptions) {
+  if (!minesweeperOptions) {
+    return;
+  }
   minesweeper.minesweeperOptions = minesweeperOptions;
 
   document.addEventListener("minesweeper:start", startMineSweepCounter);
