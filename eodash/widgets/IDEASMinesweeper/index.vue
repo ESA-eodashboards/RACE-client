@@ -32,7 +32,7 @@ const { minesweeperOptions } = defineProps({
 });
 setTimeout(() => {
   setupMinesweeper(minesweeperOptions);
-}, 250);
+}, 1000);
 
 const minesLeft = computed(() =>
   minesweeper.game
