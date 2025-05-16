@@ -195,20 +195,99 @@ export default {
         {
           //@ts-expect-error
           defineWidget(collection) {
-            return (
-              ["IDEAS", "minesweeper"].some((c) =>
-                collection?.id.includes(c),
-              ) && {
-                id: "Minesweeper",
-                layout: { x: 4, y: 0, w: 3, h: 1 },
-                title: "Minesweeper",
-                type: "internal",
-                widget: {
-                  name: "IDEASMinesweeper",
-                  properties: {},
+            if (
+              ![
+                "IDEAS2_wildlife_minesweeper",
+                "IDEAS1_hopi_minesweeper",
+              ].includes(collection?.id ?? "")
+            ) {
+              return null;
+            }
+
+            const minesweeperOptions =
+              /** @type {import("./widgets/types.d.ts").MinesweeperOptions} */ (
+                collection?.id === "IDEAS2_wildlife_minesweeper"
+                  ? {
+                      // Board dimensions in number of hex cells
+                      enableSpeciesDisplay: true,
+                      size: 20,
+                      geotiff: {
+                        projection: "EPSG:4326",
+                        url: "https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator2/AR3_wildlife_1.tif",
+                      },
+                      minColor: {
+                        // dark green
+                        r: 0,
+                        g: 100,
+                        b: 0,
+                        a: 0.6,
+                      },
+                      maxColor: {
+                        // light green
+                        r: 0,
+                        g: 255,
+                        b: 0,
+                        a: 0.6,
+                      },
+                      minValue: 1,
+                      maxValue: 8,
+                      locations: [
+                        {
+                          name: "Global Coverage",
+                          bbox: [-24, 33, 42, 71],
+                          /// How wide the bounding box should be as a longitudinal extent.
+                          horizontalExtent: 5,
+                          isMineCondition: (val) => val >= 3.5,
+                        },
+                      ],
+                    }
+                  : {
+                      // Board dimensions in number of hex cells
+                      size: 20,
+                      minColor: {
+                        // light yellow
+                        r: 255,
+                        g: 255,
+                        b: 170,
+                        a: 0.5,
+                      },
+                      maxColor: {
+                        // orange
+                        r: 255,
+                        g: 100,
+                        b: 0,
+                        a: 0.6,
+                      },
+                      minValue: 0,
+                      maxValue: 0.5,
+                      geotiff: {
+                        projection: "EPSG:4326",
+                        url: "https://eox-ideas.s3.eu-central-1.amazonaws.com/indicator1/indicator1_v1_houhpi_Summer_europe_4326_b1.tif",
+                      },
+                      locations: [
+                        {
+                          name: "Global Coverage",
+                          bbox: [-24, 33, 42, 71],
+                          /// How wide the bounding box should be as a longitudinal extent.
+                          horizontalExtent: 5,
+                          isMineCondition: 80, // 80th percentile mine threshold
+                        },
+                      ],
+                    }
+              );
+
+            return {
+              id: "Minesweeper",
+              layout: { x: 4, y: 0, w: 3, h: 1 },
+              title: "Minesweeper",
+              type: "internal",
+              widget: {
+                name: "IDEASMinesweeper",
+                properties: {
+                  minesweeperOptions,
                 },
-              }
-            );
+              },
+            };
           },
         },
         {
