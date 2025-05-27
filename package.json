@@ -12,12 +12,12 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@eodash/eodash": "https://pkg.pr.new/eodash/eodash/@eodash/eodash@197",
+    "@eodash/eodash": "https://pkg.pr.new/eodash/eodash/@eodash/eodash@f1e1479",
     "@eox/storytelling": "^1.7.2",
     "mustache": "^4.2.0",
     "ol-ext": "^4.0.31",
     "proj4": "^2.15.0",
-    "vitepress": "^1.5.0",
+    "vitepress": "^1.6.3",
     "vue": "^3.4.21",
     "vuetify": "^3.8.3"
   },
