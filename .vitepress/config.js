@@ -13,6 +13,9 @@ export default defineConfig({
       },
     },
   },
+  vite: {
+    envPrefix:["VITE_", "EODASH_"],
+  },
   themeConfig: {
     logo: "/assets/RACE_Logo.png",
     nav: [
