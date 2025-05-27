@@ -81,6 +81,7 @@ export default {
               layoutIcon:
                 "M2,5V19H8V5H2M9,5V10H15V5H9M16,5V14H22V5H16M9,11V19H15V11H9M16,15V19H22V15H16Z",
               itemFilterConfig: {
+                enableHighlighting: false,
                 resultType: "cards",
                 filtersTitle: "",
                 style: "--padding: 72px",
@@ -162,6 +163,20 @@ export default {
                 }
               : null;
           },
+        },
+        {
+          defineWidget: (selectedSTAC) =>
+            (selectedSTAC?.links.some((l) => l.endpointtype === "GeoDB" ) || selectedSTAC?.locations)
+              ? {
+                  id: "Processes",
+                  type: "internal",
+                  title: "Processes",
+                  layout: { x: 9, y: 6, w: 3, h: 5 },
+                  widget: {
+                    name: "EodashProcess",
+                  },
+                }
+              : null,
         },
       ],
     },
@@ -302,6 +317,7 @@ export default {
               layoutIcon:
                 "M13,3V9H21V3M13,21H21V11H13M3,21H11V15H3M3,13H11V3H3V13Z",
               itemFilterConfig: {
+                enableHighlighting: false,
                 resultType: "cards",
                 subTitleProperty: "subtitle",
                 imageProperty: "thumbnail",
@@ -426,6 +442,7 @@ export default {
             properties: {
               showLayoutSwitcher: false,
               itemFilterConfig: {
+                enableHighlighting: false,
                 cssVars: {
                   "--form-flex-direction": "row",
                 },
@@ -445,6 +462,7 @@ export default {
               showLayoutSwitcher: false,
               indicatorBtnText: "Select an indicator to compare",
               itemFilterConfig: {
+                enableHighlighting: false,
                 enableCompare: true,
                 // resultsTitle:"Select an indicator to compare",
                 filtersTitle: "Select an indicator to compare",
