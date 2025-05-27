@@ -166,7 +166,7 @@ export default {
         },
         {
           defineWidget: (selectedSTAC) =>
-            (selectedSTAC?.endpointtype === "GeoDB" || selectedSTAC?.locations)
+            (selectedSTAC?.links.some((l) => l.endpointtype === "GeoDB" ) || selectedSTAC?.locations)
               ? {
                   id: "Processes",
                   type: "internal",
