@@ -12,7 +12,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@eodash/eodash": "https://pkg.pr.new/eodash/eodash/@eodash/eodash@f1e1479",
+    "@eodash/eodash": "https://pkg.pr.new/eodash/eodash/@eodash/eodash@202",
     "@eox/storytelling": "^1.7.2",
     "mustache": "^4.2.0",
     "ol-ext": "^4.0.31",
