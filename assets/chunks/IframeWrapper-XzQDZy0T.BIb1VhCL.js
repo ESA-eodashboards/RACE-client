@@ -1,0 +1,1 @@
+import{c as r,o as t}from"./framework.CGrlUVaT.js";const c=["src"],o={__name:"IframeWrapper",props:{src:{type:String,required:!0}},setup(e){return(s,a)=>(t(),r("iframe",{src:e.src,class:"fill-height fill-width"},null,8,c))}};export{o as default};
