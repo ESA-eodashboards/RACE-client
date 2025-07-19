@@ -1,13 +1,4 @@
 import { createEodash } from "@eodash/eodash";
-let stacEndpoint =
-  "https://esa-eodash.github.io/RACE-catalog/RACE/catalog.json";
-const searchParams = new URLSearchParams(window.location.search);
-if (searchParams.has("catalog")) {
-  stacEndpoint = stacEndpoint.replace(
-    "catalog/",
-    `catalog/pr-preview/${searchParams.get("catalog")}/`,
-  );
-}
 
 export default createEodash({
   id: "demo",
