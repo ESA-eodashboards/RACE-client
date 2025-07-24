@@ -88,5 +88,5 @@ layout: false
     });
 </script>
 
-<NavBar></NavBar>
+<!-- <NavBar></NavBar> -->
 <eodash-container style="display: block; height: calc(100dvh - var(--vp-nav-height))"></eodash-container>
