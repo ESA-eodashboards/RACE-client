@@ -9,6 +9,7 @@ layout: page
     if (!import.meta.env.SSR) {
         if(window && !customElements.get('eox-map')) import("@eox/map");
         if(window && !customElements.get('eox-jsonform')) import("@eox/jsonform");
+        if(window) import("@eox/map/src/plugins/advancedLayersAndSources");
     }
 
     const storyurl = ref('')
