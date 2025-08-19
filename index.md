@@ -10,10 +10,10 @@ hero:
   actions:
     - theme: cta
       text: Dashboard
-      link: /explore
+      link: ./explore
     - theme: alt
       text: Usecases
-      link: /usecases
+      link: ./usecases
 ---
 
 <section class="white">
