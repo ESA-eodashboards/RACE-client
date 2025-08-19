@@ -25,7 +25,7 @@ export default defineConfig({
   themeConfig: {
     logo: "/assets/RACE_Logo.png",
     nav: [
-      { text: "Dashboard", link: "./explore" },
+      { text: "Dashboard", link: "/explore" },
       { text: "Use cases", link: "/" },
       { text: "Applications & Tools", link: "/" },
       { text: "Resources", link: "/" },

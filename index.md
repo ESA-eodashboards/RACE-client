@@ -10,10 +10,10 @@ hero:
   actions:
     - theme: cta
       text: Dashboard
-      link: ./explore
+      link: /explore
     - theme: alt
       text: Usecases
-      link: ./usecases
+      link: /usecases
 ---
 
 <section class="white">
@@ -33,46 +33,17 @@ In October 2022 the activity was rebranded to "Rapid Action for Citizens with Ea
 
 ## Featured stories
 
-  <esa-cards carousel>
+  <esa-cards>
     <esa-card
+      v-for="story in stories"
       overline="Story"
-      image="data:image/svg+xml,%3Csvg width='800' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='800' height='600' fill='%230b1d26' /%3E%3C/svg%3E"
-      tag="Atmosphere"
+      :image="story['cover-image']"
+      :tag="story.official !== true ? 'community' : undefined"
       tag-color="#00B19D"
-      title="IDEAS Story"
-      description='Lorem ipsum sit dolor amet. <br /><br /> <img src="https://placehold.co/200x100" />'
-    ></esa-card>
-    <esa-card
-      overline="Story"
-      image="data:image/svg+xml,%3Csvg width='800' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='800' height='600' fill='%230b1d26' /%3E%3C/svg%3E"
-      tag="Atmosphere"
-      tag-color="#00B19D"
-      title="WASDI Story"
-      description='Lorem ipsum sit dolor amet'
-    ></esa-card>
-    <esa-card
-      overline="Dataset"
-      image="data:image/svg+xml,%3Csvg width='800' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='800' height='600' fill='%230b1d26' /%3E%3C/svg%3E"
-      tag="Land"
-      tag-color="#0091C6"
-      title="Lorem Ipsum"
-      description='Lorem ipsum sit dolor amet'
-    ></esa-card>
-    <esa-card
-      overline="Dataset"
-      image="data:image/svg+xml,%3Csvg width='800' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='800' height='600' fill='%230b1d26' /%3E%3C/svg%3E"
-      tag="Land"
-      tag-color="#0091C6"
-      title="Lorem Ipsum"
-      description='Lorem ipsum sit dolor amet'
-    ></esa-card>
-    <esa-card
-      overline="Dataset"
-      image="data:image/svg+xml,%3Csvg width='800' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='800' height='600' fill='%230b1d26' /%3E%3C/svg%3E"
-      tag="Land"
-      tag-color="#0091C6"
-      title="Lorem Ipsum"
-      description='Lorem ipsum sit dolor amet'
+      :title="story.title"
+      :description="`${story.tags ? `Tags: ${story.tags.split(',')}<br />` : ''}${story.subtitle}`"
+      :link="`/story?id=${story.file.slice(story.file.lastIndexOf('/') + 1).replace('.md', '')}`"
+      action="Read"
     ></esa-card>
   </esa-cards>
 </section>
@@ -127,3 +98,15 @@ This is also as an enabler.
     ></esa-card>
   </esa-cards>
 </section>
+
+<script setup>
+  import { onMounted, ref } from "vue";
+  const stories = ref([]);
+
+  const getStories = async () => {
+    const response = await fetch("https://esa-eodashboards.github.io/RACE-narratives/narratives.json");
+    const json = await response.json();
+    stories.value = json.reverse();
+  }
+  getStories();
+</script>
