@@ -1,8 +1,10 @@
 // https://vitepress.dev/guide/custom-theme
 import ESA from "@eox/pages-theme-esa";
+import Layout from "./Layout.vue";
 
 export default {
   extends: ESA,
+  Layout,
   async enhanceApp({ app, router, siteData }) {
     if (!import.meta.env.SSR) {
       await import("./style.css");
