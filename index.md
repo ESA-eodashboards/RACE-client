@@ -42,7 +42,7 @@ In October 2022 the activity was rebranded to "Rapid Action for Citizens with Ea
       tag-color="#00B19D"
       :title="story.title"
       :description="`${story.tags ? `Tags: ${story.tags.split(',')}<br />` : ''}${story.subtitle}`"
-      :link="`/story?id=${story.file.slice(story.file.lastIndexOf('/') + 1).replace('.md', '')}`"
+      :link="withBase(`/story?id=${story.file.slice(story.file.lastIndexOf('/') + 1).replace('.md', '')}`)"
       action="Read"
     ></esa-card>
   </esa-cards>
@@ -101,6 +101,7 @@ This is also as an enabler.
 
 <script setup>
   import { onMounted, ref } from "vue";
+  import { withBase } from 'vitepress'
   const stories = ref([]);
 
   const getStories = async () => {
