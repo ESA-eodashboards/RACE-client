@@ -26,15 +26,15 @@ export default defineConfig({
     logo: "/assets/RACE_Logo.png",
     nav: [
       { text: "Dashboard", link: "/explore" },
-      { text: "Use cases", link: "/" },
-      { text: "Applications & Tools", link: "/" },
-      { text: "Resources", link: "/" },
-      { text: "Ecosystems", link: "/" },
-      { text: "Partnerships", link: "/" },
+      { text: "Use cases", link: "/use-cases" },
+      { text: "Applications & Tools", link: "/applications-tools" },
+      { text: "Resources", link: "/resources" },
+      { text: "Ecosystems", link: "/ecosystems" },
+      { text: "Partnerships", link: "/partnerships" },
     ],
     footer: {
       small: true,
-      title: "<img src='/assets/1_European_Commission.png' style='height: 32px' /><img src='/assets/2_ESA.png' style='height: 32px' />",
+      title: "<img src='./assets/1_European_Commission.png' style='height: 32px' /><img src='./assets/2_ESA.png' style='height: 32px' />",
       items: [
         {
           title: "FAQ",
