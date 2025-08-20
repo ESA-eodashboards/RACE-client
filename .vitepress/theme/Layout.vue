@@ -18,7 +18,7 @@ onMounted(() => {
         fixed
         :brand-logo="withBase(theme.logo)"
         :brand-title="site.title"
-        .menuItems="theme.nav.map((n) => ({ title: n.text, href: n.link }))"
+        .menuItems="theme.nav.map((n) => ({ title: n.text, href: withBase(n.link) }))"
         :enable-login="theme.login"
         style="--header-transform: translateY(0); --header-background: #001923; display: block; height: var(--vp-nav-height);"
       ></esa-navbar>
