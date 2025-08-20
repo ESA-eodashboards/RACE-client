@@ -1,7 +1,7 @@
 <script setup>
 import Layout from '@eox/pages-theme-esa/src/Layout.vue';
 import { onMounted } from 'vue';
-import { useData } from 'vitepress';
+import { useData, withBase } from 'vitepress';
 
 const {frontmatter, theme, site} = useData();
 onMounted(() => {
@@ -16,7 +16,7 @@ onMounted(() => {
     <ClientOnly>
       <esa-navbar
         fixed
-        :brand-logo="theme.logo"
+        :brand-logo="withBase(theme.logo)"
         :brand-title="site.title"
         .menuItems="theme.nav.map((n) => ({ title: n.text, href: n.link }))"
         :enable-login="theme.login"
