@@ -12,9 +12,10 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@eodash/eodash": "https://pkg.pr.new/eodash/eodash/@eodash/eodash@825a517",
+    "@eodash/eodash": "https://pkg.pr.new/eodash/eodash/@eodash/eodash@52a7542",
     "@eox/storytelling": "^1.9.1",
     "@eox/pages-theme-esa": "^0.7.2",
+    "@eox/pages-theme-eox": "^0.8.6",
     "@eox/esa-ui": "^1.17.0",
     "mustache": "^4.2.0",
     "ol-ext": "^4.0.31",
