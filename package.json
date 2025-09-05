@@ -6,7 +6,7 @@
     "eodash:dev": "eodash dev",
     "eodash:build": "eodash build",
     "eodash:preview": "eodash preview",
-    "dev": "vitepress dev",
+    "dev": "eodash build && vitepress dev",
     "build": "eodash build && vitepress build",
     "preview": "vitepress preview",
     "format": "prettier --write ."

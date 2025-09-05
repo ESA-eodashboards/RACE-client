@@ -8,7 +8,7 @@ export default {
   async enhanceApp({ app, router, siteData }) {
     if (!import.meta.env.SSR) {
       await import("./style.css");
-      await import("@eodash/eodash/webcomponent");
+      await import("../../.eodash/dist/eo-dash");
       if(!customElements.get('eox-storytelling')) await import("@eox/storytelling");
       await import("@eox/layout");
       await import("@eox/itemfilter");
