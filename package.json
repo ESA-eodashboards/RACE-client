@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@eodash/eodash": "https://pkg.pr.new/eodash/eodash/@eodash/eodash@d698f95",
-    "@eox/storytelling": "^1.9.1",
+    "@eox/storytelling": "^1.9.4",
     "@eox/pages-theme-esa": "^0.7.2",
     "@eox/pages-theme-eox": "^0.8.6",
     "@eox/esa-ui": "^1.17.0",
