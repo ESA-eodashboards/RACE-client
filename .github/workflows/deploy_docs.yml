@@ -10,6 +10,7 @@ jobs:
     env:
       EODASH_SENTINELHUB_CLIENT_ID: ${{ secrets.EODASH_SENTINELHUB_CLIENT_ID }}
       EODASH_SENTINELHUB_CLIENT_SECRET: ${{ secrets.EODASH_SENTINELHUB_CLIENT_SECRET }}
+      EODASH_OPENCAGE: ${{ secrets.EODASH_OPENCAGE }}
     permissions:
       contents: write
       pages: write
