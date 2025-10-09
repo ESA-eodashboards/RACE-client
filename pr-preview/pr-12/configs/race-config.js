@@ -70,7 +70,7 @@ export default {
               enableBackToPOIs: true,
             },
             btnsPosition: {
-              x: "12/9/9",
+              x: "12/8/9",
               y: 2,
             },
           },
@@ -324,7 +324,7 @@ export default {
               enableSearch: true,
             },
             btnsPosition: {
-              x: "12/10/10",
+              x: "12/9/10",
               y: 2,
             },
           },
@@ -708,7 +708,7 @@ export default {
               enableSearch: true,
             },
             btnsPosition: {
-              x: "12/10/10",
+              x: "12/9/10",
               y: 2,
             },
           },
