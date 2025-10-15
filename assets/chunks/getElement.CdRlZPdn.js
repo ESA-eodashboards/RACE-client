@@ -1,0 +1,1 @@
+const n=l=>{let e;if(typeof l=="string"){const r=t=>t.querySelector(l);if(e=r(document),!e){const t=document.querySelectorAll("html *");for(let o=0;o<t.length&&!(t[o].shadowRoot&&(e=r(t[o].shadowRoot),e));o++);}}else e=l;return e};export{n as g};
