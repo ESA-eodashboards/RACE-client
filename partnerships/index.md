@@ -10,6 +10,8 @@ layout: page
 
 ## Partnerships
 
-NoR and maybe EUSPA (with institutions), links to copernicus needs to be there
+RACE is supported by the ESA, NoR and maybe EUSPA (with institutions), links to copernicus needs to be there
+
+
 
 </section>
