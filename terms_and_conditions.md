@@ -5,6 +5,7 @@ layout: page
 </section>
 
 <section class="light-grey">
+
 # TERMS AND CONDITIONS OF THE WEBSITE
 
 (version as of June 9th 2020)
