@@ -5,7 +5,7 @@ import baseConfig from "@eox/pages-theme-esa/config";
 export default defineConfig({
   extends: baseConfig,
   srcDir: ".",
-  title: "RACE Dashboard",
+  title: "Rapid Action for Citizens with EO",
   description: "Rapid Action for Citizens with Earth Observation",
 
   appearance: false, // disable dark mode
@@ -26,33 +26,38 @@ export default defineConfig({
     logo: "/assets/RACE_Logo.png",
     nav: [
       { text: "Dashboard", link: "/explore" },
-      { text: "Use cases", link: "/use-cases" },
-      { text: "Applications & Tools", link: "/applications-tools" },
-      { text: "Resources", link: "/resources" },
-      { text: "Ecosystems", link: "/ecosystems" },
+      { text: "Indicators", link: "/indicators" },
+      { text: "Providers", link: "/applications-tools" },
+      { text: "Stories", link: "/stories" },
       { text: "Partnerships", link: "/partnerships" },
+      { text: "Resources", link: "/resources" },
     ],
     footer: {
       small: true,
-      title: "<img src='./assets/1_European_Commission.png' style='height: 32px' /><img src='./assets/2_ESA.png' style='height: 32px' />",
+      title: "<img src='./assets/1_European_Commission.png' style='height: 64px' /><img src='./assets/2_ESA.png' style='height: 64px' />",
       items: [
         {
-          title: "FAQ",
-          href: "/",
+          title: "Legal",
+          href: "/terms_and_conditions",
         },
         {
-          title: "About",
-          href: "/",
+          title: "Privacy",
+          href: "/privacy",
+        },
+        
+        {
+          title: "ESA",
+          href: "https://esa.int",
         },
         {
-          title: "Link 1",
-          href: "/",
+          title: "Copernicus",
+          href: "https://www.copernicus.eu/en",
         },
         {
-          title: "Link 2",
-          href: "/",
-        }
-      ]
+          title: "ESA NoR",
+          href: "https://nor-discover.org/",
+        }]
+      
     }
   },
   head: [
