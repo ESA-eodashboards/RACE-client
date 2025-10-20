@@ -1,4 +1,4 @@
-import { defineConfig } from "vitepress";
+import { withBase, defineConfig } from "vitepress";
 import baseConfig from "@eox/pages-theme-esa/config";
 
 // https://vitepress.dev/reference/site-config
@@ -38,11 +38,11 @@ export default defineConfig({
       items: [
         {
           title: "Legal",
-          href: "/terms_and_conditions",
+          href: withBase("/terms_and_conditions"),
         },
         {
           title: "Privacy",
-          href: "/privacy",
+          href: withBase("/privacy"),
         },
         
         {
