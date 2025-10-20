@@ -10,6 +10,7 @@ layout: story
         if(window && !customElements.get('eox-map')) import("@eox/map");
         if(window && !customElements.get('eox-jsonform')) import("@eox/jsonform");
         if(window) import("@eox/map/src/plugins/advancedLayersAndSources");
+        if(window && !customElements.get('eox-chart')) import("@eox/chart");
     }
 
     const storyurl = ref('')
