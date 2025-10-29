@@ -62,7 +62,7 @@ layout: eodash
     titleProperty="title"
     imageProperty="cover-image"
     subTitleProperty="subtitle"
-    aggregateResults="theme"
+    aggregateResults=""
     :filterProperties="filterProps"
     resultType="cards"
     @select="handleResultClick"
