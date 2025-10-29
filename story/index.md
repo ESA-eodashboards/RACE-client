@@ -70,6 +70,24 @@ layout: story
             storyfile = searchParams.get('id');
             storyurl.value = `https://esa-eodashboards.github.io/RACE-narratives/${storyfile}.md`;
         }
+        if (window && typeof window !== 'undefined') {
+            function injectStyleToShadowRoot(selector, css) {
+                const interval = setInterval(() => {
+                const el = document.querySelector(selector);
+                if (el && el.shadowRoot) {
+                    clearInterval(interval);
+                    const style = document.createElement('style');
+                    style.textContent = css;
+                    el.shadowRoot.appendChild(style);
+                }
+                }, 100);
+            }
+            injectStyleToShadowRoot('eox-storytelling', `
+                .story-telling .eox-map-overlay-content {
+                    padding: 0.25rem!important;
+                    background: #00000015;!important;
+                }`)
+        }
     })
     
 </script>
