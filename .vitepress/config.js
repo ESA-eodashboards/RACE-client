@@ -34,8 +34,12 @@ export default defineConfig({
     ],
     footer: {
       small: true,
-      title: "<img src='./assets/1_European_Commission.png' style='height: 64px' /><img src='./assets/2_ESA.png' style='height: 64px' />",
+      title: `<img src='./assets/1_European_Commission.png' style='height: 64px' /><img src='./assets/2_ESA.png' style='height: 64px' />`,
       items: [
+        {
+          title: "Subscribe to ESA Open Science Newsletter",
+          href: "https://assets-eur.mkt.dynamics.com/846bcca8-9413-4d04-822b-7282239af232/digitalassets/standaloneforms/1596564b-a729-f011-8c4d-7c1e52350f4e"
+        },
         {
           title: "Legal",
           href: "/terms_and_conditions",
