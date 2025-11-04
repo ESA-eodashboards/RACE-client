@@ -216,6 +216,9 @@ export default {
                 resultType: "cards",
                 subTitleProperty: "subtitle",
                 imageProperty: "thumbnail",
+                style: {
+                  "--select-filter-max-items": 7,
+                },
               },
             },
           },
@@ -754,6 +757,9 @@ export default {
                 resultType: "cards",
                 subTitleProperty: "subtitle",
                 imageProperty: "thumbnail",
+                style: {
+                  "--select-filter-max-items": 7,
+                },
               },
             },
           },
@@ -801,6 +807,9 @@ export default {
                 imageProperty: "thumbnail",
                 filtersTitle: "Select an indicator to compare",
                 resultsTitle: "",
+                style: {
+                  "--select-filter-max-items": 7,
+                },
               },
             },
           },
