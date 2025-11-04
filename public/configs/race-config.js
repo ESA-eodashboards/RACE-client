@@ -72,6 +72,7 @@ export default {
             btnsPosition: {
               x: "12/8/9",
               y: 2,
+              gap: 32
             },
           },
         },
@@ -190,7 +191,7 @@ export default {
                 enableHighlighting: false,
                 filterProperties: [
                   {
-                    keys: ["title", "themes"],
+                    keys: ["title"],
                     title: "Search",
                     placeholder: "Search by name",
                     type: "text",
@@ -215,9 +216,6 @@ export default {
                 resultType: "cards",
                 subTitleProperty: "subtitle",
                 imageProperty: "thumbnail",
-                style: {
-                  "--select-filter-max-items": 8,
-                },
               },
             },
           },
@@ -326,6 +324,7 @@ export default {
             btnsPosition: {
               x: "12/9/10",
               y: 2,
+              gap: 32
             },
           },
         },
@@ -563,6 +562,7 @@ export default {
             btnsPosition: {
               x: 12,
               y: 2,
+              gap: 32
             },
           },
         },
@@ -710,6 +710,7 @@ export default {
             btnsPosition: {
               x: "12/9/10",
               y: 2,
+              gap: 32
             },
           },
         },
@@ -728,7 +729,7 @@ export default {
                 enableHighlighting: false,
                 filterProperties: [
                   {
-                    keys: ["title", "themes"],
+                    keys: ["title"],
                     title: "Search",
                     placeholder: "Search by name",
                     type: "text",
@@ -753,9 +754,6 @@ export default {
                 resultType: "cards",
                 subTitleProperty: "subtitle",
                 imageProperty: "thumbnail",
-                style: {
-                  "--select-filter-max-items": 8,
-                },
               },
             },
           },
@@ -776,7 +774,7 @@ export default {
                 enableHighlighting: false,
                 filterProperties: [
                   {
-                    keys: ["title", "themes"],
+                    keys: ["title"],
                     title: "Search",
                     placeholder: "Search by name",
                     type: "text",
@@ -801,9 +799,6 @@ export default {
                 resultType: "cards",
                 subTitleProperty: "subtitle",
                 imageProperty: "thumbnail",
-                style: {
-                  "--select-filter-max-items": 8,
-                },
                 filtersTitle: "Select an indicator to compare",
                 resultsTitle: "",
               },
