@@ -14,6 +14,6 @@ The EO Dashboard application is based on the [eodash](https://eodash.org/) ecosy
 ## Data
 
 * [RACE Data Collections](https://github.com/ESA-eodashboards/RACE-catalog/tree/main/collections)
-* [STAC Catalogue](https://radiantearth.github.io/stac-browser/#/external/ESA-eodashboards.github.io/race-catalog/RACE/catalog.json?.language=en)
+* [STAC Catalogue](https://radiantearth.github.io/stac-browser/#/external/ESA-eodashboards.github.io/RACE-catalog/RACE/catalog.json?.language=en)
 
 </section>

@@ -1,5 +1,5 @@
 ---
-layout: eodash
+layout: page
 ---
 <script client-only>
   if(window && !customElements.get('eox-itemfilter')) import("@eox/itemfilter");
@@ -53,6 +53,8 @@ layout: eodash
     router.go(withBase(`/story?id=${filename}`));
   };
 </script>
+<section class="blue">
+</section>
 <section class="white">
 
 **Explore** and **filter** the RACE stories to find out how indicators can provide value for citizens and businesses.
