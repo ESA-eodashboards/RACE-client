@@ -472,7 +472,7 @@ export default {
                   id: Symbol(),
                   type: "internal",
                   title: "Layers",
-                  layout: { x: 0, y: 1, w: "3/3/2", h: 10 },
+                  layout: { x: 0, y: 1, w: "4/4/3", h: 10 },
                   widget: {
                     name: "EodashLayerControl",
                     properties: {
@@ -487,7 +487,6 @@ export default {
                         "--padding-vertical": "16px",
                         "--layer-tools-button-visibility": "none",
                         "--layer-summary-visibility": "none",
-                        "--layer-visibility": "none",
                       },
                     },
                   },
@@ -502,7 +501,7 @@ export default {
                   id: Symbol(),
                   type: "internal",
                   title: "Information",
-                  layout: { x: "9/9/10", y: 0, w: "3/3/2", h: 11 },
+                  layout: { x: "8/8/9", y: 0, w: "4/4/3", h: 11 },
                   widget: {
                     name: "EodashStacInfo",
                     properties: {
