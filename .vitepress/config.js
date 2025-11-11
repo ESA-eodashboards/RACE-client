@@ -27,7 +27,7 @@ export default defineConfig({
     nav: [
       { text: "Dashboard", link: "/explore" },
       { text: "Indicators", link: "/indicators" },
-      { text: "Providers", link: "/applications-tools" },
+      { text: "Providers", link: "/providers" },
       { text: "Stories", link: "/stories" },
       { text: "Partnerships", link: "/partnerships" },
       { text: "Resources", link: "/resources" },
@@ -48,7 +48,6 @@ export default defineConfig({
           title: "Privacy",
           href: "/privacy",
         },
-        
         {
           title: "ESA",
           href: "https://esa.int",
