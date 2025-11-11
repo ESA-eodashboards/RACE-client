@@ -288,23 +288,23 @@ export default {
         {
           defineWidget: (selectedSTAC) =>
             window.eodashStore.actions.includesProcess(selectedSTAC)
-              ? {
-                  id: Symbol(),
-                  type: "internal",
-                  title: "Processes",
-                  layout: { x: "8/8/9", y: 6, w: "4/4/3", h: 6 },
-                  widget: {
-                    name: "EodashProcess",
-                  },
-                }
-              : null,
+            ? {
+                id: "Processes",
+                type: "internal",
+                title: "Processes",
+                layout: { x: "8/8/9", y: 6, w: "4/4/3", h: 6 },
+                widget: {
+                  name: "EodashProcess",
+                },
+            }
+            : null
         },
       ],
     },
     light: {
       gap: 16,
       loading: {
-        id: Symbol(),
+        id: "Loading",
         type: "web-component",
         widget: {
           // https://uiball.com/ldrs/
@@ -439,7 +439,7 @@ export default {
           },
         },
         {
-          id: Symbol(),
+          id: "Tools",
           type: "internal",
           title: "Tools",
           layout: { x: 0, y: 0, w: "3/3/2", h: 2 },
@@ -469,7 +469,7 @@ export default {
           defineWidget: (selectedSTAC) => {
             return selectedSTAC
               ? {
-                  id: Symbol(),
+                  id: "Layers",
                   type: "internal",
                   title: "Layers",
                   layout: { x: 0, y: 1, w: "4/4/3", h: 10 },
@@ -498,7 +498,7 @@ export default {
           defineWidget: (selectedSTAC) => {
             return selectedSTAC
               ? {
-                  id: Symbol(),
+                  id: "StacInfo",
                   type: "internal",
                   title: "Information",
                   layout: { x: "8/8/9", y: 0, w: "4/4/3", h: 11 },
@@ -521,7 +521,7 @@ export default {
           defineWidget: (selectedSTAC) => {
             return selectedSTAC
               ? {
-                  id: Symbol(),
+                  id: "DatePicker",
                   type: "internal",
                   layout: { x: 4, y: 7, w: 4, h: 5 },
                   title: "Date",
@@ -541,7 +541,7 @@ export default {
     demo: {
       gap: 16,
       loading: {
-        id: Symbol(),
+        id: "Loader",
         type: "web-component",
         widget: {
           // https://uiball.com/ldrs/
@@ -578,7 +578,7 @@ export default {
       },
       widgets: [
         {
-          id: Symbol(),
+          id: "Tools",
           type: "internal",
           title: "Tools",
           layout: { x: 0, y: 0, w: "3/3/2", h: 2 },
@@ -606,7 +606,7 @@ export default {
           defineWidget: (selectedSTAC) => {
             return selectedSTAC
               ? {
-                  id: Symbol(),
+                  id: "Layers",
                   type: "internal",
                   title: "Layers",
                   layout: { x: 0, y: 10, w: "3/3/2", h: 2 },
@@ -640,7 +640,7 @@ export default {
           defineWidget: (selectedSTAC) => {
             return selectedSTAC
               ? {
-                  id: Symbol(),
+                  id: "StacInfo",
                   type: "internal",
                   title: "Information",
                   layout: { x: "0", y: 1, w: "3/3/2", h: 9 },
@@ -663,7 +663,7 @@ export default {
           defineWidget: (selectedSTAC) => {
             return selectedSTAC
               ? {
-                  id: Symbol(),
+                  id: "DatePicker",
                   type: "internal",
                   layout: { x: "9/9/10", y: 7, w: "3/3/2", h: 5 },
                   title: "Date",
@@ -686,7 +686,7 @@ export default {
     compare: {
       gap: 16,
       loading: {
-        id: Symbol(),
+        id: "Loading Compare",
         type: "web-component",
         widget: {
           // https://uiball.com/ldrs/
@@ -726,7 +726,7 @@ export default {
       },
       widgets: [
         {
-          id: Symbol(),
+          id: "Tools",
           type: "internal",
           title: "Tools",
           layout: { x: 0, y: 0, w: "3/3/2", h: 2 },
@@ -779,7 +779,7 @@ export default {
         },
         // compare indicators
         {
-          id: Symbol(),
+          id: "Compare Tools",
           type: "internal",
           title: "Compare Tools",
           layout: { x: "9/9/10", y: 0, w: "3/3/2", h: 2 },
@@ -835,7 +835,7 @@ export default {
           },
         },
         {
-          id: Symbol(),
+          id: "Layers",
           type: "internal",
           title: "Layers",
           layout: { x: 0, y: 1, w: "3/3/2", h: 11 },
@@ -844,7 +844,7 @@ export default {
           },
         },
         {
-          id: Symbol(),
+          id: "Comparison Layers",
           title: "Comparison Layers",
           layout: { x: "9/9/10", y: 1, w: "3/3/2", h: 11 },
           type: "internal",
@@ -859,7 +859,7 @@ export default {
           defineWidget: (selectedSTAC) => {
             return selectedSTAC
               ? {
-                  id: Symbol(),
+                  id: "Date Picker",
                   type: "internal",
                   layout: { x: 4, y: 7, w: 4, h: 5 },
                   title: "Date",
