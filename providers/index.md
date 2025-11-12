@@ -9,8 +9,6 @@ layout: page
 
 ## Providers
 
-list of them with logos, link to their offer - TODO text
-
   <esa-cards v-if="providers.length" style="min-height: 500px">
     <esa-card
       v-for="provider in providers"
