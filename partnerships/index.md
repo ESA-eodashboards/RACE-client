@@ -9,20 +9,17 @@ layout: page
 <section class="light-grey">
 
 ## Partnerships
-<section class="light-grey">
 
-## Partnerships
-
-  <esa-cards v-if="partnerships.length" style="min-height: 500px">
+  <esa-cards v-if="partnerships" style="min-height: 500px">
     <esa-card
-      v-for="partnership in partnerships"
-      :key="partnership.id"
-      :title="partnership.id"
+      v-for="(partnershipConfig, partnership) in partnerships"
+      :key="partnership"
+      :title="partnership"
       :description="`
-        ${partnership.Description}
+        ${partnershipConfig.Description}
       `"
-      :icon="`<img src='${partnership.Logo}'' height='60' style='max-width: 100%; object-fit: contain' />`"
-      :link="partnership.Url"
+      :icon="`<img src='${partnershipConfig.Logo}'' height='60' style='max-width: 100%; object-fit: contain' />`"
+      :link="partnershipConfig.Url"
       action="Website"
     ></esa-card>
   </esa-cards>
