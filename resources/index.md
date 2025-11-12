@@ -19,7 +19,7 @@ layout: page
       `"
       :icon="`<img src='${resourceConfig.Logo}'' height='60' style='max-width: 100%; object-fit: contain' />`"
       :link="resourceConfig.Url"
-      action="Website"
+      action="Browse"
     ></esa-card>
   </esa-cards>
 </section>
