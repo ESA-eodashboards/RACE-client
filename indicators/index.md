@@ -21,11 +21,12 @@ Will show pure indicator without any context (not the data, but story of an indi
       @click="setActiveTheme(null)"
     >All</a>
     <a
-      v-for="theme in Object.keys(themes)"
+      v-for="(themeConfig, theme) in themes"
+      :key=theme
       class="btn"
       :class="{active: activeTheme === theme}"
       @click="setActiveTheme(theme)"
-    >{{theme}}</a>
+    >{{themeConfig.title}}</a>
   </div>
   [DEBUG] current active theme: {{activeTheme}}
   <esa-cards v-if="indicators.length">
@@ -35,7 +36,7 @@ Will show pure indicator without any context (not the data, but story of an indi
       :description="indicator.description"
       :image="indicator.thumbnail[0]"
       :tag="indicator.themes.join(', ')"
-      :link="`/explore/?indicator=${indicator.code}`"
+      :link="withBase(`/explore/?indicator=${indicator.code}`)"
       action="View"
     ></esa-card>
   </esa-cards>
@@ -43,6 +44,7 @@ Will show pure indicator without any context (not the data, but story of an indi
 
 <script setup>
   import {onMounted, ref} from "vue";
+  import { withBase } from 'vitepress';
 
   const indicators = ref([]);
   const themes = ref([]);
