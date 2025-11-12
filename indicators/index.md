@@ -33,7 +33,7 @@ Will show pure indicator without any context (not the data, but story of an indi
     <esa-card
       v-for="indicator in indicators.filter(i => activeTheme ? i.themes.includes(activeTheme) : true)"
       :title="indicator.title"
-      :description="indicator.description"
+      :description="indicator.shortdescription"
       :image="indicator.thumbnail[0]"
       :tag="indicator.themes.join(', ')"
       :link="withBase(`/explore/?indicator=${indicator.code}`)"
