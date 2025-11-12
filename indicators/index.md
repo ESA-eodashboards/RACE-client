@@ -29,7 +29,7 @@ Will show pure indicator without any context (not the data, but story of an indi
     >{{themeConfig.title}}</a>
   </div>
 
-  <esa-cards v-if="indicators.length">
+  <esa-cards v-if="indicators.length" style="min-height: 500px">
     <esa-card
       v-for="indicator in indicators.filter(i => activeTheme ? i.themes.includes(activeTheme) : true)"
       :key="indicator.id"
