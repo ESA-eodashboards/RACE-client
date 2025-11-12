@@ -28,10 +28,11 @@ Will show pure indicator without any context (not the data, but story of an indi
       @click="setActiveTheme(theme)"
     >{{themeConfig.title}}</a>
   </div>
-  [DEBUG] current active theme: {{activeTheme}}
+
   <esa-cards v-if="indicators.length">
     <esa-card
       v-for="indicator in indicators.filter(i => activeTheme ? i.themes.includes(activeTheme) : true)"
+      :key="indicator.id"
       :title="indicator.title"
       :description="indicator.shortdescription"
       :image="indicator.thumbnail[0]"
