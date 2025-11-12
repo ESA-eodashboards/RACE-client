@@ -7,13 +7,30 @@ layout: page
 
 <section class="light-grey">
 
-## Resources 
+## Resources
 
-The EO Dashboard application is based on the [eodash](https://eodash.org/) ecosystem. For tutorials, data cataloguing and narrative creation [EOxHub Workspaces](https://hub.eox.at) are used.
-
-## Data
-
-* [RACE Data Collections](https://github.com/ESA-eodashboards/RACE-catalog/tree/main/collections)
-* [STAC Catalogue](https://radiantearth.github.io/stac-browser/#/external/ESA-eodashboards.github.io/RACE-catalog/RACE/catalog.json?.language=en)
-
+  <esa-cards v-if="resources" style="min-height: 500px">
+    <esa-card
+      v-for="(resourceConfig, resource) in resources"
+      :key="resource"
+      :title="resource"
+      :description="`
+        ${resourceConfig.Description}
+      `"
+      :icon="`<img src='${resourceConfig.Logo}'' height='60' style='max-width: 100%; object-fit: contain' />`"
+      :link="resourceConfig.Url"
+      action="Website"
+    ></esa-card>
+  </esa-cards>
 </section>
+
+<script setup>
+  import { onMounted, ref } from "vue";
+
+  const resources = ref([]);
+
+  onMounted(async () => {
+    const resourcesResponse = await fetch("https://esa-eodashboards.github.io/RACE-catalog/resources.json");
+    resources.value = await resourcesResponse.json();
+  })
+</script>
