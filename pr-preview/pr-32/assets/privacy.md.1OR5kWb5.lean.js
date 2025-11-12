@@ -1,0 +1,1 @@
+import{_ as t,a as o,o as a,ag as i}from"./chunks/framework.B0moO7en.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{"layout":"page"},"headers":[],"relativePath":"privacy.md","filePath":"privacy.md"}'),r={name:"privacy.md"};function s(n,e,l,d,c,h){return a(),o("div",null,e[0]||(e[0]=[i("",2)]))}const f=t(r,[["render",s]]);export{u as __pageData,f as default};
