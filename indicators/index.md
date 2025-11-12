@@ -26,6 +26,8 @@ layout: page
     >{{themeConfig.title}}</a>
   </div>
 
+  <p style="font-family: NotesESABold; margin: 4rem 0 !important">{{themes[activeTheme]?.description}}</p>
+
   <esa-cards v-if="indicators.length" style="min-height: 500px">
     <esa-card
       v-for="indicator in indicators.filter(i => activeTheme ? i.themes.includes(activeTheme) : true)"
