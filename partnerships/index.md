@@ -18,7 +18,7 @@ layout: page
       :description="`
         ${partnershipConfig.Description}
       `"
-      :icon="`<img src='${partnershipConfig.Logo}'' height='60' style='max-width: 100%; object-fit: contain' />`"
+      :icon="partnershipConfig.Logo ? `<img src='${partnershipConfig.Logo}'' height='60' style='max-width: 100%; object-fit: contain' /> ` : null"
       :link="partnershipConfig.Url"
       action="Website"
     ></esa-card>

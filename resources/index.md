@@ -17,7 +17,7 @@ layout: page
       :description="`
         ${resourceConfig.Description}
       `"
-      :icon="`<img src='${resourceConfig.Logo}'' height='60' style='max-width: 100%; object-fit: contain' />`"
+      :icon="resourceConfig.Logo ? `<img src='${resourceConfig.Logo}'' height='60' style='max-width: 100%; object-fit: contain' />` : null"
       :link="resourceConfig.Url"
       action="Browse"
     ></esa-card>

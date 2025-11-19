@@ -19,7 +19,7 @@ layout: page
         ${provider.narratives?.length ? `<br /><br />Stories: ${provider.narratives.map(n => `<a href='${withBase(`/story/?id=${n.file.split(/\/|\\/).pop().replace('.md', '')}`)}'>${n.title}</a>`).join(', ')}` : ''}
         ${provider.indicators?.length ? `<br /><br />Indicators: ${provider.indicators.map(i => `<a href='${withBase(`/explore/?indicator=${i.code}`)}'>${i.title}</a>`).join(', ')}` : ''}
       `"
-      :icon="`<img src='${provider.Logo}'' height='60' style='max-width: 100%; object-fit: contain' />`"
+      :icon="provider.Logo ? `<img src='${provider.Logo}'' height='60' style='max-width: 100%; object-fit: contain' />` : null"
       :link="provider.Url"
       action="Website"
     ></esa-card>
@@ -38,7 +38,7 @@ layout: page
   const getNarrativesForProvider = (providerKey) => narratives.value.filter(n => n.provider === providerKey);
 
   onMounted(async () => {
-    const providersResponse = await fetch("https://esa-eodashboards.github.io/RACE-catalog/providers.json");
+    const providersResponse = await fetch("http://0.0.0.0:8004/providers.json");
     const providersJson = await providersResponse.json();
 
     const indicatorsResponse = await fetch("https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json");
