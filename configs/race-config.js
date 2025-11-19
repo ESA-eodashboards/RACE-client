@@ -20,8 +20,8 @@ export default {
         surface: "#ffff",
       },
       variables: {
-        "surface-opacity": 0.6,
-        "primary-opacity": 0.8,
+        "surface-opacity": 0.85,
+        "primary-opacity": 0.85,
       },
       // Bank-Wong palette
       collectionsPalette: [
