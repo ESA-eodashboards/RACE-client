@@ -113,15 +113,15 @@ RACE resources and data are openly available, offeirng companies, researchers, a
   <esa-cards>
     <esa-card
       title="Innovation"
-      description="Showcasing cutting-edge EO services from European providers across themes and sectors."
+      description="Showcasing cutting-edge EO services from European providers, powering societally-relevant indicators."
     ></esa-card>
     <esa-card
       title="Openness"
-      description="Built on open data and standards with reproducible workflows and transparent provenance."
+      description="Built on open data and standards, promoting reproducibility of workflows and transparent provenance."
     ></esa-card>
     <esa-card
       title="Impact"
-      description="Turning EO knowledge into useful insights for citizens, businesses, and policy."
+      description="Turning EO knowledge into useful and widely accessible insights for citizens, businesses, and policy."
     ></esa-card>
   </esa-cards>
 </section>
