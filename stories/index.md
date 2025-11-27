@@ -87,7 +87,7 @@ layout: page
     :filterProperties="filterProps"
     resultType="cards"
     @select="handleResultClick"
-    style="--form-flex-direction: row;--card-width: 300px; --card-height: 350px; --card-border-radius: 0px;"
+    style="--form-flex-direction: row;--card-width: 300px; --card-height: 350px; --card-border-radius: 0px;--card-gap:40px"
   ></eox-itemfilter>
 </client-only>
 </section>
