@@ -44,6 +44,25 @@ layout: page
     } catch (error) {
       console.error('Error fetching JSON:', error);
     }
+    if (window && typeof window !== 'undefined') {
+      function injectStyleToShadowRoot(selector, css) {
+        const interval = setInterval(() => {
+        const el = document.querySelector(selector);
+        if (el && el.shadowRoot) {
+          clearInterval(interval);
+          const style = document.createElement('style');
+          style.textContent = css;
+          el.shadowRoot.appendChild(style);
+        }
+        }, 100);
+      }
+
+      injectStyleToShadowRoot('eox-itemfilter', `
+        small.subtitle.no-line.truncate {
+          white-space: wrap!important;
+        }
+      `);
+    }
   });
 
   // Click event handler
@@ -68,7 +87,7 @@ layout: page
     :filterProperties="filterProps"
     resultType="cards"
     @select="handleResultClick"
-    style="--form-flex-direction: row;--card-width: 450px; --card-height: 350px; --card-border-radius: 0px;"
+    style="--form-flex-direction: row;--card-width: 300px; --card-height: 350px; --card-border-radius: 0px;"
   ></eox-itemfilter>
 </client-only>
 </section>
