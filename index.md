@@ -5,7 +5,7 @@ layout: home
 hero:
   text: "European innovation in Earth Observation - for citizens and society"
   tagline: "RACE brings together environmental, economic and societal indicators developed by European industry, research institutes, academia and citizens, based on ESA and Copernicus Earth Observation data - presented through an interactive dashboard and contextual stories"
-  background: "data:image/svg+xml,%3Csvg width='800' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='800' height='600' fill='%230b1d26' /%3E%3C/svg%3E"  
+  background: "./assets/RACE_KV_2022_NOtitleNOlogo_darken.jpg"  
   image: "./assets/RACE_KV_2022.jpg"
   actions:
     - theme: cta
