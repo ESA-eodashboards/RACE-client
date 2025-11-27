@@ -16,8 +16,8 @@ layout: page
       :title="provider.id"
       :description="`
         ${provider.Description}${provider['NoR Offering'] ? `<br /><br /><a href='${provider['NoR Offering']}' target='_blank'>NoR Offering</a>` : ''}
-        ${provider.narratives?.length ? `<br /><br />Stories: ${provider.narratives.map(n => `<a href='${withBase(`/story/?id=${n.file.split(/\/|\\/).pop().replace('.md', '')}`)}'>${n.title}</a>`).join(', ')}` : ''}
-        ${provider.indicators?.length ? `<br /><br />Indicators: ${provider.indicators.map(i => `<a href='${withBase(`/explore/?indicator=${i.code}`)}'>${i.title}</a>`).join(', ')}` : ''}
+        ${provider.narratives?.length ? `<br /><br />Stories:<br />${provider.narratives.map(n => `<a href='${withBase(`/story/?id=${n.file.split(/\/|\\/).pop().replace('.md', '')}`)}'>${n.title}</a>`).join('<br />')}` : ''}
+        ${provider.indicators?.length ? `<br /><br />Indicators:<br /> ${provider.indicators.map(i => `<a href='${withBase(`/explore/?indicator=${i.code}`)}'>${i.title}</a>`).join('<br />')}` : ''}
       `"
       :icon="provider.Logo ? `<img src='${provider.Logo}'' height='60' style='max-width: 100%; object-fit: contain' />` : null"
       :link="provider.Url"
