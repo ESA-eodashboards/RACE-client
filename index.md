@@ -24,11 +24,11 @@ hero:
       description="RACE indicators are based on satellite Earth Observation data and offer open, reliable information on environmental, economic and societal conditions for everyone to explore and use."
       link="https://radiantearth.github.io/stac-browser/#/external/esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json?.language=en"
       action="View catalogue"
-      icon="<img src='https://github.com/eurodatacube/eodash-assets/blob/main/logos/indicators.png?raw=true' height='60' style='max-width: 100%' />"
+      icon="<img src='https://github.com/ESA-eodashboards/RACE-client/blob/main/public/assets/Indicators.png?raw=true' height='60' style='max-width: 100%' />"
     ></esa-card>
     <esa-card
       title="Built for citizens"
-      icon="<img src='https://github.com/eurodatacube/eodash-assets/blob/main/logos/citizens.png?raw=true' height='60' style='max-width: 100%' />"
+      icon="<img src='https://github.com/ESA-eodashboards/RACE-client/blob/main/public/assets/citizens.png?raw=true' height='60' style='max-width: 100%' />"
       description="RACE indicators highlight issues that matter to society. We present them through stories that put the data into context and show how EO supports daily life."
     ></esa-card>
     <esa-card
