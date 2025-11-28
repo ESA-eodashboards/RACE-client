@@ -99,7 +99,7 @@ RACE (Rapid Action for Citizens with Earth Observation) is a collaborative Earth
 
 By allowing users to explore examples of what EO can reveal about their surroundings and places of interest and presenting these insights through interactive tools and stories, RACE aims to encourage curiosity and helps citizens appreciate the role and potential of EO in modern society.
 
-RACE resources and data are openly available, offeirng companies, researchers, and developers opportunities to build upon the data and explore new applications that reflect Europe’s evolving EO innovation landscape.
+RACE resources and data are openly available, offering companies, researchers, and developers opportunities to build upon the data and explore new applications that reflect Europe’s evolving EO innovation landscape.
 
 </section>
 <section class="blue">
