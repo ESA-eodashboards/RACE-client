@@ -36,9 +36,10 @@ layout: page
 
   const getIndicatorsForProvider = (providerKey) => indicators.value.filter(i => i.providers?.includes(providerKey));
   const getNarrativesForProvider = (providerKey) => narratives.value.filter(n => n.provider === providerKey);
+  const cacheBuster = `?t=${new Date().getTime()}`; // Add a timestamp for cache busting
 
   onMounted(async () => {
-    const providersResponse = await fetch("https://esa-eodashboards.github.io/RACE-catalog/providers.json");
+    const providersResponse = await fetch(`https://esa-eodashboards.github.io/RACE-catalog/providers.json${cacheBuster}`);
     const providersJson = await providersResponse.json();
 
     const indicatorsResponse = await fetch("https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json");

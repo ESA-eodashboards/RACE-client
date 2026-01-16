@@ -32,6 +32,7 @@ layout: eodash
             }, { immediate: true })
         })
         })
+    const cacheBuster = `?t=${new Date().getTime()}`; // Add a timestamp for cache busting
 </script>
 
-<eo-dash style="display: block; height: calc(100dvh - var(--vp-nav-height))" :config="withBase('/configs/race-config.js')"/>
+<eo-dash style="display: block; height: calc(100dvh - var(--vp-nav-height))" :config="withBase(`/configs/race-config.js${cacheBuster}`)"/>
