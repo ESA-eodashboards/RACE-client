@@ -12,7 +12,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@eodash/eodash": "^5.5.1",
+    "@eodash/eodash": "^5.5.2",
     "@eox/storytelling": "^1.10.0",
     "@eox/pages-theme-esa": "^0.7.3",
     "@eox/pages-theme-eox": "^0.8.6",
