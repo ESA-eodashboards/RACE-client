@@ -23,3 +23,9 @@ esa-navbar {
 esa-cover {
   --cover-height: auto;
 }
+
+@media (min-width: 640px) {
+    section {
+        padding: 80px 100px;
+    }
+}
