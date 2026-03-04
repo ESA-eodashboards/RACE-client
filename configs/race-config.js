@@ -262,6 +262,15 @@ export default {
                   type: "internal",
                   widget: {
                     name: "EodashStacInfo",
+                    properties: {
+                      featured: [
+                        "description",
+                        "providers",
+                        { key: "eodash:stories" },
+                        { key: "assets", filter: (asset) => !(asset?.roles?.includes("story")) },
+                        "links"
+                      ],
+                    }
                   },
                 }
               : null;
