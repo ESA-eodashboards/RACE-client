@@ -72,7 +72,7 @@ hero:
     <esa-card
       title="Stories"
       description="Interactive stories that give context to indicators and show their relevance in daily life."
-      link="/providers"
+      link="/stories"
       action="Explore"
     ></esa-card>
     <esa-card
