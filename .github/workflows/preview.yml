@@ -5,37 +5,54 @@
 name: Deploy PR previews
 
 on:
-  pull_request:
+  pull_request_target:
+    branches:
+      - main
     types:
       - opened
       - reopened
       - synchronize
-      - closed # pr-preview-action will do cleanup here, but build steps can be skipped
-
+      - closed
 # do not allow running multiple of pipelines for this PR in parallel
 concurrency: preview-${{ github.ref }}
 
 jobs:
   deploy-preview:
-    runs-on: ubuntu-22.04
     env:
       EODASH_SENTINELHUB_CLIENT_ID: ${{ secrets.EODASH_SENTINELHUB_CLIENT_ID }}
       EODASH_SENTINELHUB_CLIENT_SECRET: ${{ secrets.EODASH_SENTINELHUB_CLIENT_SECRET }}
       EODASH_OPENCAGE: ${{ secrets.EODASH_OPENCAGE }}
+    runs-on: ubuntu-22.04
     permissions:
       contents: write
       pages: write
       pull-requests: write
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 20
-      - uses: actions/checkout@v4
-      - if: github.event.action != 'closed'
+      # This checks out "main" first for Check for changes step
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Check for changes to prevent modification of build scripts
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3
+        id: filter
+        with:
+          # Define what is "unsafe" to change
+          filters: |
+            unsafe_files:
+              - 'package.json'
+              - 'package-lock.json'
+      - 
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          submodules: 'true'
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - if: steps.filter.outputs.unsafe_files == 'false' && github.event.action != 'closed'
         run: |
           npm install
           npm run build -- --base /pr-preview/pr-${{ github.event.number }}/
       - name: Deploy preview
-        uses: rossjrw/pr-preview-action@v1
+        uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1
         with:
           source-dir: .vitepress/dist/
