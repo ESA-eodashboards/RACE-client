@@ -1,5 +1,6 @@
 import { defineConfig } from "vitepress";
 import baseConfig from "@eox/pages-theme-esa/config";
+import feedbackSchema from "./theme/feedback_schema.json";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -23,6 +24,12 @@ export default defineConfig({
     },
   },
   themeConfig: {
+    feedback: {
+      endpoint:
+        "https://git-issue-creator.eodashboard.hub-otc.eox.at/create-issue?repo=github.com/ESA-eodashboards/issues",
+      schema: feedbackSchema,
+      position: "bottom-right",
+    },
     logo: "/assets/RACE_Logo.png",
     nav: [
       { text: "Dashboard", link: "/explore" },

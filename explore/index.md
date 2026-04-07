@@ -32,6 +32,22 @@ layout: eodash
             }, { immediate: true })
         })
         })
+        // to fix attribution button display (bottom-right)
+        const eodashElement = document.querySelector('eo-dash');
+        if (eodashElement && eodashElement.shadowRoot) {
+            const fixMapHeight = () => {
+                const eoxMapDiv = eodashElement.shadowRoot.querySelector('eox-map');
+                if (eoxMapDiv) {
+                    const mapDiv = eoxMapDiv.shadowRoot.querySelector('#map');
+                    if (mapDiv) {
+                        mapDiv.style.height = 'calc(100% - 80px)'
+                    }
+                }
+            }
+
+            // Run it again after a short delay just in case the map re-renders
+            setTimeout(fixMapHeight, 500)
+        }
     const cacheBuster = `?t=${new Date().getTime()}`; // Add a timestamp for cache busting
 </script>
 
