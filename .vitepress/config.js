@@ -1,6 +1,6 @@
 import { defineConfig } from "vitepress";
 import baseConfig from "@eox/pages-theme-esa/config";
-import feedbackSchema from "./theme/feedback_schema.json";
+import feedbackSchema from "../public/configs/feedback_schema.json";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({

@@ -1,5 +1,6 @@
 ---
 layout: eodash
+feedback: false
 ---
 
 <script setup>
