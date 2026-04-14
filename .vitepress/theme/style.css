@@ -29,3 +29,7 @@ esa-cover {
         padding: 80px 100px;
     }
 }
+/* Ensure the feedback button is above the storytelling content */
+:root {
+  --vp-z-index-footer: 50;
+}

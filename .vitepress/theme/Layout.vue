@@ -22,6 +22,12 @@ onMounted(() => {
         :enable-login="theme.login"
         style="--header-transform: translateY(0); --header-background: #001923; display: block; height: var(--vp-nav-height);"
       ></esa-navbar>
+        <eox-feedback-button
+          v-if="theme.feedback && frontmatter?.feedback !== false"
+          :endpoint="theme.feedback?.endpoint"
+          .schema="theme.feedback?.schema"
+          :position="theme.feedback?.position"
+        />
     </ClientOnly>
     <Content></Content>
   </div>
