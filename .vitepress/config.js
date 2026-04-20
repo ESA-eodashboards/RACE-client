@@ -41,7 +41,7 @@ export default defineConfig({
     ],
     footer: {
       small: true,
-      title: `<img src='assets/1_European_Commission.png' style='height: 64px' /><img src='assets/2_ESA.png' style='height: 64px' />`,
+      title: `<img src='/assets/1_European_Commission.png' style='height: 64px' /><img src='/assets/2_ESA.png' style='height: 64px' />`,
       items: [
         {
           title: "Subscribe to ESA Open Science Newsletter",
