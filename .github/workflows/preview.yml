@@ -22,19 +22,19 @@ jobs:
       EODASH_SENTINELHUB_CLIENT_ID: ${{ secrets.EODASH_SENTINELHUB_CLIENT_ID }}
       EODASH_SENTINELHUB_CLIENT_SECRET: ${{ secrets.EODASH_SENTINELHUB_CLIENT_SECRET }}
       EODASH_OPENCAGE: ${{ secrets.EODASH_OPENCAGE }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
       pages: write
       pull-requests: write
     steps:
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
-          node-version: 20
+          node-version: 24
       # This checks out "main" first for Check for changes step
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Check for changes to prevent modification of build scripts
-        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3
+        uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4
         id: filter
         with:
           # Define what is "unsafe" to change
@@ -43,7 +43,7 @@ jobs:
               - 'package.json'
               - 'package-lock.json'
       - 
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: 'true'
           ref: ${{ github.event.pull_request.head.ref }}
