@@ -22,7 +22,7 @@ hero:
     <esa-card
       title="Rich collection of indicators"
       description="RACE indicators are based on satellite Earth Observation data and offer open, reliable information on environmental, economic and societal conditions for everyone to explore and use."
-      link="https://radiantearth.github.io/stac-browser/#/external/esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json?.language=en"
+      link="https://browser.moregeo.it/external/esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json?.language=en"
       action="View catalogue"
       icon="<img src='https://raw.githubusercontent.com/ESA-eodashboards/RACE-client/refs/heads/main/public/assets/Indicators.png' height='60' style='max-width: 100%' />"
     ></esa-card>
