@@ -11,8 +11,10 @@ export default {
   options: {
     useSubCode: true
   },
-  stacEndpoint:
-    "https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json",
+  stacEndpoint: {
+    endpoint: "https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json",
+    colormapRegistry: "https://raw.githubusercontent.com/eurodatacube/eodash-assets/refs/heads/main/defaults/colormaps.json",
+  },
   brand: {
     noLayout: true,
     name: "RACE",
