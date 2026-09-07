@@ -8,9 +8,6 @@ const feedbackSchema = await fetch(`/configs/feedback_schema.json${cacheBuster}`
 
 export default {
   id: "race",
-  options: {
-    useSubCode: true
-  },
   stacEndpoint: {
     endpoint: "https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json",
     colormapRegistry: "https://raw.githubusercontent.com/eurodatacube/eodash-assets/refs/heads/main/defaults/colormaps.json",
