@@ -1,0 +1,223 @@
+{
+  "type": "object",
+  "title": "Let us know your feedback or issue type.",
+  "options": {
+    "remove_empty_properties": true,
+    "remove_additional_properties": true
+  },
+  "oneOf": [
+    {
+      "title": "Feature Request",
+      "properties": {
+        "type_feature": {
+          "type": "string",
+          "default": "feature",
+          "options": {
+            "hidden": true
+          }
+        },
+        "labels": {
+          "type": "string",
+          "default": "enhancement",
+          "options": {
+            "hidden": true
+          }
+        },
+        "title": {
+          "type": "string",
+          "title": "Title"
+        },
+        "Expected behavior": {
+          "type": "string",
+          "format": "textarea",
+          "minLength": 1,
+          "options": {
+            "inputAttributes": {
+              "placeholder": "Describe the new functionality and how it would help you."
+            }
+          }
+        },
+        "Contact information or additional comments (optional)": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type_feature"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "title": "Data Issue or Question",
+      "properties": {
+        "type_catalog": {
+          "type": "string",
+          "default": "catalog",
+          "options": {
+            "hidden": true
+          }
+        },
+        "labels": {
+          "type": "string",
+          "default": "data integration",
+          "options": {
+            "hidden": true
+          }
+        },
+        "title": {
+          "type": "string",
+          "title": "Title"
+        },
+        "Steps to reproduce": {
+          "type": "string",
+          "format": "textarea",
+          "minLength": 1,
+          "options": {
+            "inputAttributes": {
+              "placeholder": "Describe what you tried to do."
+            }
+          }
+        },
+        "Expected content": {
+          "type": "string",
+          "format": "textarea",
+          "minLength": 1,
+          "options": {
+            "inputAttributes": {
+              "placeholder": "Is data not available? Would you like to see more data for this indicator?"
+            }
+          }
+        },
+        "Contact information or additional comments (optional)": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type_catalog"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "title": "Stories Issue or Question",
+      "properties": {
+        "type_stories": {
+          "type": "string",
+          "default": "stories",
+          "options": {
+            "hidden": true
+          }
+        },
+        "title": {
+          "type": "string",
+          "title": "Title"
+        },
+        "labels": {
+          "type": "string",
+          "default": "story",
+          "options": {
+            "hidden": true
+          }
+        },
+        "Problem or question for the story": {
+          "type": "string",
+          "format": "textarea",
+          "minLength": 1,
+          "options": {
+            "inputAttributes": {
+              "placeholder": "Describe the issue within the story layout or content."
+            }
+          }
+        },
+        "Contact information or additional comments (optional)": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type_stories"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "title": "Something not working",
+      "properties": {
+        "type_bug": {
+          "type": "string",
+          "default": "bug",
+          "options": {
+            "hidden": true
+          }
+        },
+        "labels": {
+          "type": "string",
+          "default": "bug",
+          "options": {
+            "hidden": true
+          }
+        },
+        "title": {
+          "type": "string",
+          "title": "Title"
+        },
+        "Steps to reproduce": {
+          "type": "string",
+          "format": "textarea",
+          "minLength": 1,
+          "options": {
+            "inputAttributes": {
+              "placeholder": "1. Go to... 2. Click... 3. Error occurs."
+            }
+          }
+        },
+        "Expected behavior": {
+          "type": "string",
+          "format": "textarea",
+          "minLength": 1,
+          "options": {
+            "inputAttributes": {
+              "placeholder": "What should have happened instead?"
+            }
+          }
+        },
+        "Contact information or additional comments (optional)": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type_bug"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "title": "Other issue or question",
+      "properties": {
+        "type_other": {
+          "type": "string",
+          "default": "other",
+          "options": {
+            "hidden": true
+          }
+        },
+        "title": {
+          "type": "string",
+          "title": "Title"
+        },
+        "Issue or Question": {
+          "type": "string",
+          "format": "textarea",
+          "minLength": 1,
+          "options": {
+            "inputAttributes": {
+              "placeholder": "Please provide as much detail as possible."
+            }
+          }
+        },
+        "Contact information or additional comments (optional)": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type_other"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}
