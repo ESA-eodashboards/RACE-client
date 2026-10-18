@@ -1,6 +1,22 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
+head:
+  - - link
+    - rel: alternate
+      type: application/json
+      title: STAC Catalog
+      href: https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json
+  - - script
+    - type: application/ld+json
+    - |
+      {
+        "@context": "https://schema.org",
+        "@type": "DataCatalog",
+        "name": "RACE STAC Catalog",
+        "url": "https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json",
+        "description": "Rapid Action for Citizens with Earth Observation STAC Catalog."
+      }
 
 hero:
   text: "European innovation in Earth Observation - for citizens and society"
@@ -139,6 +155,12 @@ RACE resources and data are openly available, offering companies, researchers, a
   </esa-cards>
 </section>
 
+<section class="blue">
+
+## Open Data & STAC Catalog
+
+All underlying Earth Observation datasets featured on the Dashboard are openly accessible via our [STAC (SpatioTemporal Asset Catalog)](/stac) endpoint: [`https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json`](https://esa-eodashboards.github.io/RACE-catalog/RACE/catalog.json).
+</section>
 
 <script setup>
   import { onMounted, ref } from "vue";
