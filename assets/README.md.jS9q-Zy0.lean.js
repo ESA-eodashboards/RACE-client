@@ -1,0 +1,1 @@
+import{_ as a,o as i,a as e,ag as t}from"./chunks/framework.BCktD_7k.js";const k=JSON.parse('{"title":"RACE Client","description":"","frontmatter":{},"headers":[],"relativePath":"README.md","filePath":"README.md"}'),n={name:"README.md"};function l(h,s,p,o,d,c){return i(),e("div",null,[...s[0]||(s[0]=[t("",15)])])}const u=a(n,[["render",l]]);export{k as __pageData,u as default};
