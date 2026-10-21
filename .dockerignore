@@ -1,0 +1,9 @@
+node_modules
+.vitepress/cache
+.eodash
+dist
+.git
+.github
+.vscode
+.DS_Store
+npm-debug.log*
