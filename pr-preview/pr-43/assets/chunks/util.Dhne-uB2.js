@@ -1,0 +1,1 @@
+function e(){throw new Error("Unimplemented abstract method.")}let o=0;function i(t){const n=t;return n.ol_uid||(n.ol_uid=String(++o))}const r="10.11.0";function c(t){return!!t&&typeof t.then=="function"&&typeof t.catch=="function"}export{r as V,e as a,i as g,c as i};

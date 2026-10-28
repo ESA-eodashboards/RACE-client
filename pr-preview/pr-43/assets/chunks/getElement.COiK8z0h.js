@@ -1,0 +1,1 @@
+const f=t=>{let n;if(typeof t=="string"){const o=(r,d)=>{let e=r.querySelector(d);if(e)return e;const u=r.querySelectorAll("*");for(let l=0;l<u.length;l++){const c=u[l];if(c.shadowRoot&&(e=o(c.shadowRoot,d),e))return e}return null};n=o(document,t)||void 0}else n=t;return n};export{f as g};
