@@ -5,7 +5,7 @@
 name: Deploy PR previews
 
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - main
     types:
@@ -18,6 +18,7 @@ concurrency: preview-${{ github.ref }}
 
 jobs:
   deploy-preview:
+    if: github.event.pull_request.head.repo.full_name == github.repository
     env:
       EODASH_SENTINELHUB_CLIENT_ID: ${{ secrets.EODASH_SENTINELHUB_CLIENT_ID }}
       EODASH_SENTINELHUB_CLIENT_SECRET: ${{ secrets.EODASH_SENTINELHUB_CLIENT_SECRET }}
@@ -31,28 +32,17 @@ jobs:
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24
-      # This checks out "main" first for Check for changes step
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      - name: Check for changes to prevent modification of build scripts
-        uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4
-        id: filter
-        with:
-          # Define what is "unsafe" to change
-          filters: |
-            unsafe_files:
-              - 'package.json'
-              - 'package-lock.json'
       - 
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: 'true'
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-      - if: steps.filter.outputs.unsafe_files == 'false' && github.event.action != 'closed'
+      - if: github.event.action != 'closed'
         run: |
-          npm install
+          npm ci
           npm run build -- --base /pr-preview/pr-${{ github.event.number }}/
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1
         with:
           source-dir: .vitepress/dist/
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
