@@ -12,14 +12,18 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@eodash/eodash": "^5.9.0",
-    "@eox/storytelling": "^1.13.0",
+    "@eodash/eodash": "^5.10.0",
+    "@eox/storytelling": "^1.13.1",
     "@eox/pages-theme-eox": "^1.9.0",
     "@eox/esa-ui": "^1.17.0",
     "ol-ext": "^4.0.31",
+    "pinia": "^4.0.3",
     "proj4": "^2.15.0",
-    "vue": "^3.4.21",
+    "vue": "^3.5.13",
     "vuetify": "^3.8.3"
+  },
+  "overrides": {
+    "@eodash/stac": "^0.2.0"
   },
   "devDependencies": {
     "vitepress": "^1.6.3",
