@@ -1,0 +1,1 @@
+import{B as r}from"./basedecoder-CFuHG7Lk.SvhKjSrN.js";import{i as a}from"./pako.esm-D3omb4Kr.C-fHaejM.js";var f=class extends r{decodeBlock(e){return a(new Uint8Array(e)).buffer}};export{f as default};
