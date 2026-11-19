@@ -1,6 +1,11 @@
-import{m as t}from"./main.c2F9in3F.js";customElements.define("esa-cover",class extends HTMLElement{constructor(){super(),this.attachShadow({mode:"open"})}connectedCallback(){this.css=`
+import{m as t}from"./main.c2F9in3F.js";const e="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 11.428'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:%23335e6f;%7D%3C/style%3E%3C/defs%3E%3Cg transform='translate(19380 17820)'%3E%3Cpath class='a' d='M13.885,128.157l-.316.316a.536.536,0,0,0,0,.758l3.747,3.725H.536a.536.536,0,0,0-.536.536v.446a.536.536,0,0,0,.536.536H17.316L13.57,138.2a.536.536,0,0,0,0,.758l.316.316a.536.536,0,0,0,.758,0l5.2-5.179a.536.536,0,0,0,0-.758l-5.2-5.179A.536.536,0,0,0,13.885,128.157Z' transform='translate(-19380 -17948)'/%3E%3C/g%3E%3C/svg%3E";customElements.define("esa-cover",class extends HTMLElement{constructor(){super(),this.attachShadow({mode:"open"})}connectedCallback(){this.css=`
         :host {
           --cover-height: 100dvh;
+          --cover-dimmer-background-image: linear-gradient(
+            to right,
+            rgba(0, 50, 71, 0.5),
+            rgba(0, 50, 71, 0)
+          );
         }
         #cover {
           height: var(--cover-height);
@@ -9,6 +14,9 @@ import{m as t}from"./main.c2F9in3F.js";customElements.define("esa-cover",class e
         }
         #cover > .l-container {
           margin-top: 192px;
+        }
+        .c-cover__dimmer {
+          background-image: var(--cover-dimmer-background-image);
         }
         .feature a.cta {
           white-space: nowrap;
@@ -57,7 +65,7 @@ import{m as t}from"./main.c2F9in3F.js";customElements.define("esa-cover",class e
                       ${this.getAttribute("cta-link").startsWith("http")?'target="_blank"':""}
                     >
                       <label>${this.getAttribute("cta-text")}</label>
-                      <img class="arrow" src="https://esa.int/extension/pillars/design/pillars/images/arrow.svg" alt="Open item" draggable="false">
+                      <img class="arrow" src="${e}" alt="Open item" draggable="false">
                     </a>
                   `:""}
                   ${this.getAttribute("alt")!==null?`
