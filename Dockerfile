@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx:1.31.9-alpine
 
 # Custom Nginx configuration for VitePress routing
 COPY nginx.conf /etc/nginx/conf.d/default.conf
